@@ -21,7 +21,10 @@ MongoClient.connect(
     app.use(express.json());
 
     app.use('/api/v1/users', routes);
-    app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
+    if (process.env.NODE_ENV === 'production') {
+        app.use(express.static('client/build'));
+    }
+    app.use();
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`)
     })
