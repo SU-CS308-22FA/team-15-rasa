@@ -47,6 +47,10 @@ export default function UserSettings() {
               You can change account settings in this page.
             </Typography>
             <div>
+              <h1>Username: {location.state.username}</h1>
+              <p>Email: {location.state.email}</p>
+            </div>
+            <div>
               <List
                 sx={{ mt: 3, mb: 2 }}
                 scomponent="nav"
@@ -104,6 +108,18 @@ export default function UserSettings() {
                     }
                   >
                     Delete account
+                  </Button>
+                </ListItem>
+                <Divider light />
+                <ListItem button>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => navigate("/")}
+                  >
+                    Log out
                   </Button>
                 </ListItem>
               </List>
