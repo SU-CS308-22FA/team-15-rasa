@@ -36,6 +36,7 @@ export default function ChangeUsername() {
       })
       .then((res) => {
         console.log(res);
+        location.state.username = data.get("new_username");
       });
   };
   return (
@@ -114,7 +115,9 @@ export default function ChangeUsername() {
                                 </Link> */}
                       <Button
                         onClick={() =>
-                          navigate("/usersettings", { state: location.state })
+                          navigate("/usersettings", {
+                            state: location.state,
+                          })
                         }
                       >
                         {" "}

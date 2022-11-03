@@ -31,6 +31,7 @@ export default function ChangeEmail() {
       .then((res) => {
         console.log(res);
         console.log("foo");
+        navigate("/");
       });
   };
   return (
@@ -105,11 +106,7 @@ export default function ChangeEmail() {
                       {/* <Link to="/signup" href="#" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link> */}
-                      <Button
-                        onClick={() =>
-                          navigate("/usersettings", { state: location.state })
-                        }
-                      >
+                      <Button onClick={() => navigate("/usersettings")}>
                         {" "}
                         Return to user settings{" "}
                       </Button>

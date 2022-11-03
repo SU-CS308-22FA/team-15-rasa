@@ -47,6 +47,10 @@ export default function UserSettings() {
               You can change account settings in this page.
             </Typography>
             <div>
+              <h1>Username: {location.state.username}</h1>
+              <p>Email: {location.state.email}</p>
+            </div>
+            <div>
               <List
                 sx={{ mt: 3, mb: 2 }}
                 scomponent="nav"

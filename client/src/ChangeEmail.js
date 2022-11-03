@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar, Toolbar, Container } from "@mui/material";
 import axios from "axios";
+import { LocationSearching } from "@mui/icons-material";
 
 const theme = createTheme();
 
@@ -36,6 +37,7 @@ export default function ChangeEmail() {
       })
       .then((res) => {
         console.log(res);
+        location.state.email = data.get("new_email");
       });
   };
   return (
@@ -114,7 +116,9 @@ export default function ChangeEmail() {
                                 </Link> */}
                       <Button
                         onClick={() =>
-                          navigate("/usersettings", { state: location.state })
+                          navigate("/usersettings", {
+                            state: location.state,
+                          })
                         }
                       >
                         {" "}

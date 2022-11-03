@@ -34,6 +34,7 @@ export default function ChangePassword() {
       })
       .then((res) => {
         console.log(res);
+        location.state.password = data.get("new_password");
       });
   };
   return (
@@ -123,7 +124,9 @@ export default function ChangePassword() {
                                 </Link> */}
                       <Button
                         onClick={() =>
-                          navigate("/usersettings", { state: location.state })
+                          navigate("/usersettings", {
+                            state: location.state,
+                          })
                         }
                       >
                         {" "}
