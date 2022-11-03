@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar, Toolbar, Container } from "@mui/material";
 import axios from "axios";
-import { LocationSearching } from "@mui/icons-material";
 
 const theme = createTheme();
 
