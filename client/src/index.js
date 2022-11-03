@@ -4,7 +4,11 @@ import Layout from "./Layout";
 import NoPage from "./NoPage";
 import SignInSide from "./SignInSide";
 import Signup from "./Signup.js";
-import User from "./User";
+import ChangeEmail from "./ChangeEmail";
+import ChangePassword from "./ChangePassword";
+import ChangeUsername from "./ChangeUsername";
+import DeleteAccount from "./DeleteAccount";
+import UserSettings from "./UserSettings";
 
 export default function App() {
   return (
@@ -13,7 +17,11 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<SignInSide />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="*" element={<NoPage />} />
+          <Route path="usersettings" element={<UserSettings />} />
+          <Route path="changeemail" element={<ChangeEmail />} />
+          <Route path="changepassword" element={<ChangePassword />} />
+          <Route path="changeusername" element={<ChangeUsername />} />
+          <Route path="deleteaccount" element={<DeleteAccount />} />
         </Route>
       </Routes>
     </BrowserRouter>
