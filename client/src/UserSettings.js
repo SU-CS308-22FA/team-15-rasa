@@ -106,6 +106,18 @@ export default function UserSettings() {
                     Delete account
                   </Button>
                 </ListItem>
+                <Divider light />
+                <ListItem button>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => navigate("/")}
+                  >
+                    Log out
+                  </Button>
+                </ListItem>
               </List>
             </div>
           </Container>
