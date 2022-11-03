@@ -20,15 +20,18 @@ export default function Signup() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log("button pressed");
-    axios.post('/api/v1/users', {
-      email: data.get("email"),
-      username: data.get("username"),
-      password: data.get("password"),
-    }).catch((err) => {
+    axios
+      .post("/api/v1/users", {
+        email: data.get("email"),
+        username: data.get("username"),
+        password: data.get("password"),
+      })
+      .catch((err) => {
         console.log(err);
-    }).then((res) => {
+      })
+      .then((res) => {
         console.log(res);
-    });
+      });
   };
 
   return (
