@@ -6,7 +6,7 @@ module.exports = class DBCtrl {
         const { itemsList, totalNumItems } = await GenericDAO.getItems(filters, req.body["_collection"]);
 
         let response = {
-            users: itemsList,
+            items: itemsList,
             filters: filters,
             total_results: totalNumItems,
         }
