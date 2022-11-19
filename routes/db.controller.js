@@ -2,8 +2,8 @@ const GenericDAO = require("../dao/genericDAO.js")
 
 module.exports = class DBCtrl {
     static async apiGetItems(req, res, next) {
-        let filters = req.query;
-        const { itemsList, totalNumItems } = await GenericDAO.getItems(filters, req.body["_collection"]);
+        let {_collection, ...filters } = req.query;
+        const { itemsList, totalNumItems } = await GenericDAO.getItems(filters, _collection);
 
         let response = {
             items: itemsList,
