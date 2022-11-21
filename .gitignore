@@ -9,6 +9,8 @@ lerna-debug.log*
 
 # React build
 client/build
+admin/build
+team/build
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -43,6 +45,8 @@ build/Release
 
 # Dependency directories
 client/node_modules
+admin/node_modules
+team/node_modules
 node_modules/
 jspm_packages/
 
