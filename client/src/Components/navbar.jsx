@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Navbar() {
   return (
     <nav>
       <ul>
         <li>
-          <Link to="/">Sıgn in</Link>
+          <Link to="/">Sign in</Link>
         </li>
         <li>
-          <Link to="/signup">Sıgn up</Link>
+          <Link to="/signup">Sign up</Link>
         </li>
       </ul>
     </nav>

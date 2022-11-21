@@ -1,50 +1,46 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-//import Link from "@mui/material/Link";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 import axios from "axios";
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function Signin() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log("button pressed");
     if (!data.get("email") || !data.get("password")) {
-      return;
+        alert("Invalid email or password");
+        return;
     }
     axios
-      .get("/api/v1/users", {
+      .get("/api/v1", {
         params: {
-          email: data.get("email"),
+            _collection: "users",
+            email: data.get("email"),
         },
       })
       .catch((err) => {
         console.log(err);
       })
       .then((res) => {
-        console.log(res);
         if (
-          res.data.users.length == 0 ||
-          res.data.users[0].password != data.get("password")
+            res &&
+            (res.data.items.length === 0 ||
+            res.data.items[0].password !== data.get("password"))
         ) {
-          return;
+            alert("Invalid email or password");
+            return;
         }
-        console.log(res.data.users[0]);
-        navigate("/usersettings", { state: res.data.users[0] });
+        navigate("/", { state: res.data.items[0] });
       });
   };
 
@@ -117,12 +113,12 @@ export default function SignInSide() {
                 Sign In
               </Button>
               <Grid container>
+                <Grid item>
+                  <Link to="/">Home Page</Link>
+                </Grid>
                 <Grid item xs></Grid>
                 <Grid item>
-                  {/* <Link to="/signup" href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link> */}
-                  <Link to="/signup">Sıgn up</Link>
+                    <Link to="/signup">Sign up</Link>
                 </Grid>
               </Grid>
             </Box>
