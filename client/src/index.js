@@ -1,5 +1,5 @@
-import {createRoot} from "react-dom/client";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Signin from "./Auth/User/Signin";
 import Signup from "./Auth/User/Signup.js";
@@ -11,6 +11,7 @@ import AccountSettings from "./AccountSettings/AccountSettings";
 import HomePage from "./Home/HomePage";
 import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
+import MySurvey from "./Misc/Survey";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
           <Route path="userprofile" element={<UserProfile />} />
+          <Route path="survey" element={<MySurvey />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
