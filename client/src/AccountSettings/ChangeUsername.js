@@ -2,39 +2,47 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+//import Link from "@mui/material/Link";
+import {useLocation, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AppBar, Toolbar, Container } from "@mui/material";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import {AppBar, Container, Toolbar} from "@mui/material";
 import axios from "axios";
+
 const theme = createTheme();
 
-export default function ChangePassword() {
+export default function ChangeUsername() {
   const location = useLocation();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!data.get("password") || !data.get("new_password")) {
+    if (!data.get("new_username")) {
+      alert("Please enter a new username.");
       return;
     }
+    if (data.get("new_username") === location.state.username) {
+        alert("New username cannot be the same as the old username.");
+        return;
+    }
     axios
-      .put("/api/v1/users", {
+      .put("/api/v1", {
+        _collection: "users",
         _id: location.state._id,
-        username: location.state.username,
-        email: location.state.email,
-        password: data.get("new_password"),
+        username: data.get("new_username"),
       })
       .catch((err) => {
         console.log(err);
-
-        console.log(location.state);
       })
       .then((res) => {
-        console.log(res);
-        location.state.password = data.get("new_password");
+        if (res && res.status === 200) {
+          location.state.username = data.get("new_username");
+          alert("Username changed successfully!");
+        } else {
+          alert("Error changing username.");
+        }
       });
   };
   return (
@@ -61,7 +69,7 @@ export default function ChangePassword() {
                 }}
               >
                 <Typography component="h1" variant="h5">
-                  Change Password
+                  Edit Username
                 </Typography>
                 <Typography
                   variant="h5"
@@ -69,7 +77,7 @@ export default function ChangePassword() {
                   color="textSecondary"
                   paragraph
                 >
-                  You can change your password in this page.
+                  You can change your username on this page.
                 </Typography>
                 <Box
                   component="form"
@@ -81,31 +89,10 @@ export default function ChangePassword() {
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                  />
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="new_password"
-                    label="New Password"
-                    type="password"
-                    name="new_password"
-                    autoComplete="new_password"
-                  />
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="confirm_password"
-                    label="Confirm Password"
-                    type="password"
-                    name="confirm_password"
-                    autoComplete="confirm_password"
+                    id="new_username"
+                    label="New Username"
+                    name="new_username"
+                    autoComplete="new_username"
                     autoFocus
                   />
                   <Button
@@ -119,18 +106,12 @@ export default function ChangePassword() {
                   <Grid container>
                     <Grid item xs></Grid>
                     <Grid item>
-                      {/* <Link to="/signup" href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link> */}
                       <Button
                         onClick={() =>
-                          navigate("/usersettings", {
-                            state: location.state,
-                          })
+                          navigate("/accountsettings", {state: location.state})
                         }
                       >
-                        {" "}
-                        Return to user settings{" "}
+                        Return to account settings
                       </Button>
                     </Grid>
                   </Grid>

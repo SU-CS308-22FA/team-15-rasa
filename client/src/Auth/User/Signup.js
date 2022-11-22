@@ -1,40 +1,63 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 import axios from "axios";
 
 const theme = createTheme();
 
 export default function Signup() {
-  const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log("button pressed");
-    axios
-      .post("/api/v1/users", {
-        email: data.get("email"),
-        username: data.get("username"),
-        password: data.get("password"),
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  };
+    if (!data.get("username") || !data.get("email") || !data.get("password")) {
+        alert("Invalid username, email or password");
+        return;
+    }
 
-  return (
+    axios
+        .get("/api/v1", {
+            params: {
+                _collection: "users",
+                email: data.get("email"),
+            },
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((res) => {
+            if (res.data.items.length !== 0) {
+                alert("Email already exists");
+                return;
+            }
+            axios
+                .post("/api/v1", {
+                    _collection: "users",
+                    username: data.get("username"),
+                    email: data.get("email"),
+                    password: data.get("password"),
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        navigate("/signin");
+                    } else {
+                        alert("An error occurred while signing up, please try again.");
+                    }
+                });
+        });
+    };
+
+    return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -114,7 +137,7 @@ export default function Signup() {
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
-                  <Link to="/">Have an account? Sıgn in</Link>
+                  <Link to="/signin">Have an account? Sign in</Link>
                 </Grid>
               </Grid>
             </Box>
@@ -122,5 +145,5 @@ export default function Signup() {
         </Grid>
       </Grid>
     </ThemeProvider>
-  );
+    );
 }
