@@ -9,6 +9,11 @@ import ChangePassword from "./ChangePassword";
 import ChangeUsername from "./ChangeUsername";
 import DeleteAccount from "./DeleteAccount";
 import UserSettings from "./UserSettings";
+import AdminLogin from "./AdminLogin";
+import AdminPanel from "./AdminPanel";
+import CreateTeamAccount from "./CreateTeamAccount";
+import TeamLogin from "./TeamLogin";
+import TeamPanel from "./TeamPanel";
 
 export default function App() {
   return (
@@ -22,6 +27,11 @@ export default function App() {
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
+          <Route path="adminlogin" element={<AdminLogin />} />
+          <Route path="adminpanel" element={<AdminPanel />} />
+          <Route path="createteamaccount" element={<CreateTeamAccount />} />
+          <Route path="teamlogin" element={<TeamLogin />} />
+          <Route path="teampanel" element={<TeamPanel />} />
         </Route>
       </Routes>
     </BrowserRouter>

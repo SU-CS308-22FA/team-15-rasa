@@ -16,7 +16,7 @@
     "client": "cd client && npm start",
     "admin": "cd admin && npm start",
     "team": "cd team && npm start",
-    "dev": "concurrently -n server,admin,client,team -c 'red,green,blue,yellow' \"nodemon server.js\" \"npm run admin\" \"npm run client\" \"npm run team\""
+    "dev": "concurrently -n server,client -c 'red,green' \"nodemon server.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
