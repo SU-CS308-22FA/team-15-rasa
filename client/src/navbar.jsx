@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import * as React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (

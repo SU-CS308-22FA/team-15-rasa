@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import NoPage from "./NoPage";
+//import NoPage from "./NoPage";
 import SignInSide from "./SignInSide";
 import Signup from "./Signup.js";
 import ChangeEmail from "./ChangeEmail";
@@ -9,6 +9,8 @@ import ChangePassword from "./ChangePassword";
 import ChangeUsername from "./ChangeUsername";
 import DeleteAccount from "./DeleteAccount";
 import UserSettings from "./UserSettings";
+import StandFix from "./StandFix";
+import RefereeData from "./RefereeData";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
+          <Route path="StandFix" element={<StandFix/>} />
+          <Route path="refereedata" element={<RefereeData/>} />
         </Route>
       </Routes>
     </BrowserRouter>
