@@ -4,10 +4,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
-import UserMenu from "../UserMenu/UserMenu";
+import UserMenu from "../../UserMenu/UserMenu";
 import Box from "@mui/material/Box";
 
-export default function AccountSettings() {
+export default function UserAccountSettings() {
   const location = useLocation();
   const navigate = useNavigate();
   return (

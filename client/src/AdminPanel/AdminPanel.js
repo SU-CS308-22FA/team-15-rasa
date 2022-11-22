@@ -2,19 +2,10 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate, useLocation } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  ListItem,
-  Divider,
-  ListItemText,
-  List,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
 
-export default function TeamPanel() {
+export default function AdminPanel() {
   const location = useLocation();
   const navigate = useNavigate();
   return (
@@ -23,7 +14,7 @@ export default function TeamPanel() {
       <AppBar position="relative">
         <Toolbar>
           <Typography component="h1" variant="h5">
-            Rasa Team Panel
+            Rasa Admin Panel
           </Typography>
         </Toolbar>
       </AppBar>
@@ -36,7 +27,7 @@ export default function TeamPanel() {
               color="textPrimary"
               gutterbottom
             >
-              Team Panel Moment
+              Admin Panel Moment
             </Typography>
             <Typography
               variant="h5"
@@ -47,44 +38,41 @@ export default function TeamPanel() {
               2010-2011 şampiyonu trabzonspor
             </Typography>
             <div>
-              <p>Email: {location.state.email}</p>
-            </div>
-            <div>
               <List
                 sx={{ mt: 3, mb: 2 }}
                 scomponent="nav"
                 aria-label="mailbox folders"
               >
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/changeemail", { state: location.state })
+                      navigate("/createteamaccount", { state: location.state })
                     }
                   >
-                    Change Email
+                    Create Team Account
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 <Divider />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/changepassword", { state: location.state })
+                      navigate("/adminchangepassword", { state: location.state })
                     }
                   >
                     Change Password
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 
                 <Divider light />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
@@ -94,7 +82,7 @@ export default function TeamPanel() {
                   >
                     Log out
                   </Button>
-                </ListItem>
+                </ListItemButton>
               </List>
             </div>
           </Container>

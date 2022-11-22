@@ -2,19 +2,10 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate, useLocation } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  ListItem,
-  Divider,
-  ListItemText,
-  List,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
 
-export default function AdminPanel() {
+export default function TeamPanel() {
   const location = useLocation();
   const navigate = useNavigate();
   return (
@@ -23,7 +14,7 @@ export default function AdminPanel() {
       <AppBar position="relative">
         <Toolbar>
           <Typography component="h1" variant="h5">
-            Rasa Admin Panel
+            Rasa Team Panel
           </Typography>
         </Toolbar>
       </AppBar>
@@ -36,7 +27,7 @@ export default function AdminPanel() {
               color="textPrimary"
               gutterbottom
             >
-              Admin Panel Moment
+              Team Panel Moment
             </Typography>
             <Typography
               variant="h5"
@@ -55,36 +46,36 @@ export default function AdminPanel() {
                 scomponent="nav"
                 aria-label="mailbox folders"
               >
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/createteamaccount", { state: location.state })
+                      navigate("/teamchangeemail", { state: location.state })
                     }
                   >
-                    Create Team Account
+                    Change Email
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 <Divider />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/changepassword", { state: location.state })
+                      navigate("/teamchangepassword", { state: location.state })
                     }
                   >
                     Change Password
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 
                 <Divider light />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
@@ -94,7 +85,7 @@ export default function AdminPanel() {
                   >
                     Log out
                   </Button>
-                </ListItem>
+                </ListItemButton>
               </List>
             </div>
           </Container>
