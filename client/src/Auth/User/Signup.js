@@ -33,27 +33,29 @@ export default function Signup() {
             console.log(err);
         })
         .then((res) => {
-            if (res.data.items.length !== 0) {
+            if (res && res.data.items.length !== 0) {
                 alert("Email already exists");
                 return;
             }
-            axios
-                .post("/api/v1", {
-                    _collection: "users",
-                    username: data.get("username"),
-                    email: data.get("email"),
-                    password: data.get("password"),
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .then((res) => {
-                    if (res.status === 200) {
-                        navigate("/signin");
-                    } else {
-                        alert("An error occurred while signing up, please try again.");
-                    }
-                });
+            if (res) {
+                axios
+                    .post("/api/v1", {
+                        _collection: "users",
+                        username: data.get("username"),
+                        email: data.get("email"),
+                        password: data.get("password"),
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                    .then((res) => {
+                        if (res && res.status === 200) {
+                            navigate("/signin");
+                        } else {
+                            alert("An error occurred while signing up, please try again.");
+                        }
+                    });
+            }
         });
     };
 

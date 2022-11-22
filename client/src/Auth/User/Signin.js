@@ -40,7 +40,11 @@ export default function Signin() {
             alert("Invalid email or password");
             return;
         }
-        navigate("/", { state: res.data.items[0] });
+        if (res) {
+            navigate("/", { state: res.data.items[0] });
+        } else {
+            alert("There was an error. Please try again.");
+        }
       });
   };
 

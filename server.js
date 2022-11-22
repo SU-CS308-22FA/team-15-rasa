@@ -1,8 +1,6 @@
 const express = require("express");
 const mongodb = require("mongodb");
 const cors = require("cors");
-const userRouter = require("./routes/users.route.js");
-const usersDAO = require("./dao/usersDAO.js");
 const dbRouter = require("./routes/db.route.js");
 const genericDAO = require("./dao/genericDAO.js");
 if (process.env.NODE_ENV !== "production") {
@@ -24,8 +22,6 @@ MongoClient.connect(uri)
     await genericDAO.injectDB(client);
     app.use(cors());
     app.use(express.json());
-
-    app.use("/api/v1/users", userRouter);
     app.use("/api/v1", dbRouter);
     if (process.env.NODE_ENV === "production") {
       app.use(express.static("client/build"));
