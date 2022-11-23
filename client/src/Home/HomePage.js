@@ -87,7 +87,7 @@ export default function HomePage() {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                     onClick={() =>
-                                        navigate("/matchdata", { state: location.state })
+                                        navigate("/standfix", { state: location.state })
                                     }
                                 >
                                     Fixture and Standings
@@ -101,7 +101,7 @@ export default function HomePage() {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                     onClick={() =>
-                                        navigate("/refereestats", { state: location.state })
+                                        navigate("/refereedata", { state: location.state })
                                     }
                                 >
                                     Referee Stats

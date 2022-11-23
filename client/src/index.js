@@ -11,6 +11,8 @@ import AccountSettings from "./AccountSettings/AccountSettings";
 import HomePage from "./Home/HomePage";
 import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
+import StandFix from "./FixtureStanding/StandFix";
+import RefereeData from "./Referee/RefereeData";
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
           <Route path="userprofile" element={<UserProfile />} />
+          <Route path="standfix" element={<StandFix/>} />
+          <Route path="refereedata" element={<RefereeData/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
