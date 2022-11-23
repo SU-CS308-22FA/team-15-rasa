@@ -21,24 +21,8 @@ export default function TeamPanel() {
       <main>
         <div>
           <Container maxWidth="sm">
-            <Typography
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterbottom
-            >
-              Team Panel Moment
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              2010-2011 şampiyonu trabzonspor
-            </Typography>
             <div>
-              <p>Email: {location.state.email}</p>
+              <p>Logged in as {location.state.email}</p>
             </div>
             <div>
               <List
@@ -73,7 +57,20 @@ export default function TeamPanel() {
                     Change Password
                   </Button>
                 </ListItemButton>
-                
+                <Divider />
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() =>
+                      navigate("/sendcomplaint", { state: location.state })
+                    }
+                  >
+                    Send Complaint
+                  </Button>
+                </ListItemButton>
                 <Divider light />
                 <ListItemButton>
                   <Button

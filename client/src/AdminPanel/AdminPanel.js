@@ -22,20 +22,12 @@ export default function AdminPanel() {
         <div>
           <Container maxWidth="sm">
             <Typography
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterbottom
-            >
-              Admin Panel Moment
-            </Typography>
-            <Typography
               variant="h5"
               align="center"
               color="textSecondary"
               paragraph
             >
-              2010-2011 şampiyonu trabzonspor
+              Menu
             </Typography>
             <div>
               <List
@@ -43,6 +35,20 @@ export default function AdminPanel() {
                 scomponent="nav"
                 aria-label="mailbox folders"
               >
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() =>
+                      navigate("/seecomplaints", { state: location.state })
+                    }
+                  >
+                    See Referee Complaints
+                  </Button>
+                </ListItemButton>
+                <Divider />
                 <ListItemButton>
                   <Button
                     type="submit"

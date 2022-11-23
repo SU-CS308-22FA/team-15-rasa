@@ -13,12 +13,15 @@ import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
 import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
-import CreateTeamAccount from "./Auth/Admin/CreateTeamAccount";
+import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
 import TeamLogin from "./Auth/Team/TeamLogin";
 import TeamPanel from "./TeamPanel/TeamPanel";
 import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
 import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
 import TeamChangePassword from "./AccountSettings/Team/TeamChangePassword";
+import SendComplaint from "./TeamPanel/SendComplaint";
+import SeeComplaints from "./AdminPanel/SeeComplaints";
+
 
 export default function App() {
   return (
@@ -42,6 +45,8 @@ export default function App() {
           <Route path="teampanel" element={<TeamPanel />} />
           <Route path="teamchangeemail" element={<TeamChangeEmail />} />
           <Route path="teamchangepassword" element={<TeamChangePassword />} />
+          <Route path="sendcomplaint" element={<SendComplaint />} />
+          <Route path="seecomplaints" element={<SeeComplaints />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

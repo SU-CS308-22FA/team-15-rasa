@@ -6,25 +6,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const theme = createTheme();
 
-export default function CreateTeamAccount() {
+export default function SendComplaint() {
+    const location = useLocation();
     const navigate = useNavigate();
     const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-      if (!data.get("email") || !data.get("password")) {
-          alert("Invalid email or password");
+      if (!data.get("ref_name")) {
+          alert("Please enter a valid referee name.");
           return;
       }
 
       axios
           .get("/api/v1", {
               params: {
-                  _collection: "team_accounts",
-                  email: data.get("email"),
+                  _collection: "complaints",
+                  ref_name: data.get("ref_name"),
+                  email: location.state.email
               },
           })
           .catch((err) => {
@@ -32,25 +34,26 @@ export default function CreateTeamAccount() {
           })
           .then((res) => {
               if (res && res.data.items.length !== 0) {
-                  alert("Email already exists");
+                  alert("You already have an active complaint about this referee.");
                   return;
               }
               if (res) {
                   axios
                       .post("/api/v1", {
-                          _collection: "team_accounts",
-                          username: data.get("username"),
-                          email: data.get("email"),
-                          password: data.get("password"),
+                          _collection: "complaints",
+                          email: location.state.email,
+                          ref_name: data.get("ref_name"),
+                          explanation: data.get("explanation")
                       })
                       .catch((err) => {
                           console.log(err);
                       })
                       .then((res) => {
                           if (res && res.status === 200) {
-                              navigate("/teamlogin");
+                              navigate("/teampanel", { state: location.state });
+                              alert("Complaint sent.");
                           } else {
-                              alert("An error occurred while signing up, please try again.");
+                              alert("An error occurred, please try again.");
                           }
                       });
               }
@@ -70,7 +73,7 @@ export default function CreateTeamAccount() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Create Team Account
+              Send complaint about a referee
             </Typography>
             <Box
               component="form"
@@ -82,21 +85,18 @@ export default function CreateTeamAccount() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="ref_name"
+                name="ref_name"
+                label="Referee Name"
                 autoFocus
               />
               <TextField
                 margin="normal"
-                required
+                //required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                id="explanation"
+                name="explanation"
+                label="Explanation"
               />
               <Button
                 type="submit"
@@ -104,7 +104,7 @@ export default function CreateTeamAccount() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Create
+                Send
               </Button>
             </Box>
           </Box>

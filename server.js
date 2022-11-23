@@ -18,7 +18,7 @@ MongoClient.connect(uri)
     process.exit(1); // exit with error
   })
   .then(async (client) => {
-    await usersDAO.injectDB(client);
+    //await usersDAO.injectDB(client);
     await genericDAO.injectDB(client);
     app.use(cors());
     app.use(express.json());
