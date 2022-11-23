@@ -4,11 +4,32 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
+import axios from "axios";
 
 export default function SeeComplaints() {
   const location = useLocation();
   const navigate = useNavigate();
-  return (
+
+  getdata = () => {
+    axios
+        .get("/api/v1", {
+            params: {
+                _collection: "complaints"
+            },
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((res) => {
+            console.log("data recieved");
+        })
+    }
+
+    /*componentDidMount = () => {
+        this.getdata();
+      }*/
+
+    return(
     <>
       <CssBaseline />
       <AppBar position="relative">
