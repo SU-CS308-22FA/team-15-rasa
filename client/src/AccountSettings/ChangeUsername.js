@@ -3,35 +3,46 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 //import Link from "@mui/material/Link";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AppBar, Toolbar, Container } from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import Checkbox from "@mui/material/Checkbox";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import {AppBar, Container, Toolbar} from "@mui/material";
 import axios from "axios";
+
 const theme = createTheme();
 
-export default function ChangeEmail() {
+export default function ChangeUsername() {
   const location = useLocation();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    //const data = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);
+    if (!data.get("new_username")) {
+      alert("Please enter a new username.");
+      return;
+    }
+    if (data.get("new_username") === location.state.username) {
+        alert("New username cannot be the same as the old username.");
+        return;
+    }
     axios
-      .delete("/api/v1/users", { data: location.state })
+      .put("/api/v1", {
+        _collection: "users",
+        _id: location.state._id,
+        username: data.get("new_username"),
+      })
       .catch((err) => {
         console.log(err);
-
-        console.log(location.state);
       })
       .then((res) => {
-        console.log(res);
-        console.log("foo");
-        navigate("/");
+        if (res && res.status === 200) {
+          location.state.username = data.get("new_username");
+          alert("Username changed successfully!");
+        } else {
+          alert("Error changing username.");
+        }
       });
   };
   return (
@@ -58,7 +69,7 @@ export default function ChangeEmail() {
                 }}
               >
                 <Typography component="h1" variant="h5">
-                  Delete Account
+                  Edit Username
                 </Typography>
                 <Typography
                   variant="h5"
@@ -66,15 +77,8 @@ export default function ChangeEmail() {
                   color="textSecondary"
                   paragraph
                 >
-                  Are you sure you want to delete your account?
+                  You can change your username on this page.
                 </Typography>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox defaultChecked />}
-                    label="Yes"
-                  />
-                  <FormControlLabel control={<Checkbox />} label="No" />
-                </FormGroup>
                 <Box
                   component="form"
                   noValidate
@@ -85,30 +89,29 @@ export default function ChangeEmail() {
                     margin="normal"
                     required
                     fullWidth
-                    id="password"
-                    label="Password"
-                    type="password"
-                    name="password"
-                    autoComplete="password"
+                    id="new_username"
+                    label="New Username"
+                    name="new_username"
+                    autoComplete="new_username"
                     autoFocus
                   />
                   <Button
-                    type="danger"
+                    type="submit"
                     fullWidth
-                    variant="outlined"
+                    variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Delete My Account
+                    Save Changes
                   </Button>
                   <Grid container>
                     <Grid item xs></Grid>
                     <Grid item>
-                      {/* <Link to="/signup" href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link> */}
-                      <Button onClick={() => navigate("/usersettings")}>
-                        {" "}
-                        Return to user settings{" "}
+                      <Button
+                        onClick={() =>
+                          navigate("/accountsettings", {state: location.state})
+                        }
+                      >
+                        Return to account settings
                       </Button>
                     </Grid>
                   </Grid>

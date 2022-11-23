@@ -1,14 +1,15 @@
-import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
-//import NoPage from "./NoPage";
-import SignInSide from "./SignInSide";
-import Signup from "./Signup.js";
-import ChangeEmail from "./ChangeEmail";
-import ChangePassword from "./ChangePassword";
-import ChangeUsername from "./ChangeUsername";
-import DeleteAccount from "./DeleteAccount";
-import UserSettings from "./UserSettings";
+import {createRoot} from "react-dom/client";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Layout from "./Components/Layout";
+import Signup from "./Auth/User/Signup.js";
+import ChangeEmail from "./AccountSettings/ChangeEmail";
+import ChangePassword from "./AccountSettings/ChangePassword";
+import ChangeUsername from "./AccountSettings/ChangeUsername";
+import DeleteAccount from "./AccountSettings/DeleteAccount";
+import AccountSettings from "./AccountSettings/AccountSettings";
+import HomePage from "./Home/HomePage";
+import NoPage from "./Misc/NoPage";
+import UserProfile from "./Profile/User/UserProfile";
 import StandFix from "./StandFix";
 import RefereeData from "./RefereeData";
 
@@ -17,19 +18,22 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<SignInSide />} />
+          <Route index element={<HomePage />} />
+          <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="usersettings" element={<UserSettings />} />
+          <Route path="accountsettings" element={<AccountSettings />} />
           <Route path="changeemail" element={<ChangeEmail />} />
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
+          <Route path="userprofile" element={<UserProfile />} />
           <Route path="StandFix" element={<StandFix/>} />
           <Route path="refereedata" element={<RefereeData/>} />
+          <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<App />);

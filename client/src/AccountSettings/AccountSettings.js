@@ -2,19 +2,12 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate, useLocation } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  ListItem,
-  Divider,
-  ListItemText,
-  List,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
+import UserMenu from "../UserMenu/UserMenu";
+import Box from "@mui/material/Box";
 
-export default function UserSettings() {
+export default function AccountSettings() {
   const location = useLocation();
   const navigate = useNavigate();
   return (
@@ -27,6 +20,17 @@ export default function UserSettings() {
           </Typography>
         </Toolbar>
       </AppBar>
+      <Box
+        sx={{
+          my: 3,
+          mx: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+      >
+        {UserMenu()}
+      </Box>
       <main>
         <div>
           <Container maxWidth="sm">
@@ -34,9 +38,9 @@ export default function UserSettings() {
               variant="h2"
               align="center"
               color="textPrimary"
-              gutterbottom
+              gutterbottom="true"
             >
-              Edit Account
+              Edit Account Settings
             </Typography>
             <Typography
               variant="h5"
@@ -44,19 +48,15 @@ export default function UserSettings() {
               color="textSecondary"
               paragraph
             >
-              You can change account settings in this page.
+              You can change your account settings in this page.
             </Typography>
-            <div>
-              <h1>Username: {location.state.username}</h1>
-              <p>Email: {location.state.email}</p>
-            </div>
             <div>
               <List
                 sx={{ mt: 3, mb: 2 }}
                 scomponent="nav"
                 aria-label="mailbox folders"
               >
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
@@ -68,9 +68,9 @@ export default function UserSettings() {
                   >
                     Change Email
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 <Divider />
-                <ListItem button divider>
+                <ListItemButton divider>
                   <Button
                     type="submit"
                     fullWidth
@@ -82,8 +82,8 @@ export default function UserSettings() {
                   >
                     Change Username
                   </Button>
-                </ListItem>
-                <ListItem button>
+                </ListItemButton>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
@@ -95,9 +95,9 @@ export default function UserSettings() {
                   >
                     Change Password
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 <Divider light />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
@@ -109,19 +109,19 @@ export default function UserSettings() {
                   >
                     Delete account
                   </Button>
-                </ListItem>
+                </ListItemButton>
                 <Divider light />
-                <ListItem button>
+                <ListItemButton>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/", { state: location.state })}
                   >
-                    Log out
+                    Home Page
                   </Button>
-                </ListItem>
+                </ListItemButton>
               </List>
             </div>
           </Container>
