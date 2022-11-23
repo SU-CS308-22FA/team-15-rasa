@@ -14,6 +14,19 @@ import UserProfile from "./Profile/User/UserProfile";
 import StandFix from "./FixtureStanding/StandFix";
 import RefereeData from "./Referee/RefereeData";
 
+import AdminLogin from "./Auth/Admin/AdminLogin";
+import AdminPanel from "./AdminPanel/AdminPanel";
+import SeeComplaints from "./AdminPanel/SeeComplaints";
+import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
+import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
+
+import TeamLogin from "./Auth/Team/TeamLogin";
+import TeamPanel from "./TeamPanel/TeamPanel";
+import SendComplaint from "./TeamPanel/SendComplaint";
+import TeamChangePassword from "./AccountSettings/Team/TeamChangePassword";
+import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
+
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -30,6 +43,16 @@ export default function App() {
           <Route path="userprofile" element={<UserProfile />} />
           <Route path="standfix" element={<StandFix/>} />
           <Route path="refereedata" element={<RefereeData/>} />
+          <Route path="adminlogin" element={<AdminLogin/>} />
+          <Route path="adminpanel" element={<AdminPanel/>} />
+          <Route path="seecomplaints" element={<SeeComplaints/>} />
+          <Route path="createteamaccount" element={<CreateTeamAccount/>} />
+          <Route path="adminchangepassword" element={<AdminChangePassword/>} />
+          <Route path="teamlogin" element={<TeamLogin/>} />
+          <Route path="teampanel" element={<TeamPanel/>} />
+          <Route path="sendcomplaint" element={<SendComplaint/>} />
+          <Route path="teamchangepassword" element={<TeamChangePassword/>} />
+          <Route path="teamchangeemail" element={<TeamChangeEmail/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

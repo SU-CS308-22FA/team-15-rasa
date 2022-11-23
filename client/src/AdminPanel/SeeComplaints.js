@@ -1,16 +1,13 @@
-import * as React from "react";
+//import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import {useLocation, useNavigate} from "react-router-dom";
-import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
+import {AppBar, Toolbar,} from "@mui/material";
+import CompList from "./CompList"
+import React, { useState } from "react";
 import axios from "axios";
 
-export default function SeeComplaints() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  getdata = () => {
+/*async function getdata(){
     axios
         .get("/api/v1", {
             params: {
@@ -19,16 +16,56 @@ export default function SeeComplaints() {
         })
         .catch((err) => {
             console.log(err);
+            console.log("something is wrong");
         })
-        .then((res) => {
+        .then((res)=>{
             console.log("data recieved");
+            console.log(res);
+            return res.data.items;
         })
-    }
+        .then(function(items){
+            let placeholder = document.querySelector("#data-output");
+            console.log(placeholder);
+            let out = "";
+            for(let item of items){
+                console.log(item);
+                console.log(item.ref_name);
+                console.log(item.explanation);
+                console.log(item.email);
+                out+=`
+                    <tr>
+                        <td> ${item.ref_name} </td>
+                        <td> ${item.explanation} </td>
+                        <td> ${item.email} </td>
+                    </tr>
+                `;
+            }
+            console.log(out);
+            console.log(placeholder);
+            return out;
+            placeholder.innerHTML = out;
+        })
+  }*/
 
-    /*componentDidMount = () => {
-        this.getdata();
-      }*/
+export default function SeeComplaints() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [complaintList, setComplaintList] = useState([]);
+  //const asd = getdata();
 
+  const getinfo = () => {
+    axios
+        .get("/api/v1", {
+            params: {
+                _collection: "complaints"
+            },
+        })
+        .then((res)=>{
+        console.log(res);
+        setComplaintList(res.data.items);
+    });
+  };
+  getinfo();
     return(
     <>
       <CssBaseline />
@@ -40,27 +77,42 @@ export default function SeeComplaints() {
         </Toolbar>
       </AppBar>
       <main>
-        <div>
-          <Container maxWidth="sm">
-            <Typography
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterbottom
-            >
-              Referee Complaints
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              2010-2011 şampiyonu trabzonspor
-            </Typography>
-            
-          </Container>
-        </div>
+      <div className="Teams">
+              <Typography component="h1" variant="h5" className="ref-container">
+                <br></br>
+                Complaints
+                <br></br>
+              </Typography>
+              <div className="RefData">
+                <br></br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Referee Name</th>
+                            <th>Explanation</th>
+                            <th>Team</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data output">
+                        <tr>
+                            <th>{complaintList.map((val, key) => {
+                            return <div>{val.ref_name}</div>;
+                        })}</th>
+                            <th>{complaintList.map((val, key) => {
+                            return <div>{val.explanation}</div>;
+                        })}</th>
+                            <th>{complaintList.map((val, key) => {
+                            return <div>{val.email}</div>;
+                        })}</th>
+                        </tr>
+                        <label></label>
+                    </tbody>
+                </table>  
+                <br></br>  
+                <br></br>  
+                <br></br>  
+              </div>
+            </div>
       </main>
     </>
   );
