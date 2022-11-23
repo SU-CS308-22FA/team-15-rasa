@@ -4,8 +4,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar, Toolbar} from "@mui/material";
-import './Site.css';
-import {RefereeTable} from './components/RefereeTable';
+import '../CSS/Site.css';
+import {RefereeTable} from '../Components/RefereeTable';
 
 const theme = createTheme();
 

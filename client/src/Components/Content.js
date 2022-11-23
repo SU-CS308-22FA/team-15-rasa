@@ -2,9 +2,9 @@ import React, {useState} from "react";
 //import Standings from "./Standings";
 //import Table from "./StanTableAPI.js";
 //import Fix from "./Fix";
-import StandingData from '.././StandingData';
-import FixtureData from '.././FixtureData';
-import '../Site.css';
+import StandingData from '../FixtureStanding/StandingData';
+import FixtureData from '../FixtureStanding/FixtureData';
+import '../CSS/Site.css';
 import Button from "@mui/material/Button";
 //import { Table } from "@mui/material";
 

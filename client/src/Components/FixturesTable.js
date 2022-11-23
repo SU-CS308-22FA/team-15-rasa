@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
-import '.././Site.css';
+import '../CSS/Site.css';
 import Button from "@mui/material/Button";
 import { GlobalFilter } from './GlobalFilter';
 import SMOCK_DATA from './FMOCK_DATA.json'
