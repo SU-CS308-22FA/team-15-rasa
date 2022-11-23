@@ -11,17 +11,8 @@ import UserAccountSettings from "./AccountSettings/User/UserAccountSettings";
 import HomePage from "./Home/HomePage";
 import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
-import AdminLogin from "./Auth/Admin/AdminLogin";
-import AdminPanel from "./AdminPanel/AdminPanel";
-import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
-import TeamLogin from "./Auth/Team/TeamLogin";
-import TeamPanel from "./TeamPanel/TeamPanel";
-import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
-import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
-import TeamChangePassword from "./AccountSettings/Team/TeamChangePassword";
-import SendComplaint from "./TeamPanel/SendComplaint";
-import SeeComplaints from "./AdminPanel/SeeComplaints";
-
+import StandFix from "./FixtureStanding/StandFix";
+import RefereeData from "./Referee/RefereeData";
 
 export default function App() {
   return (
@@ -37,16 +28,8 @@ export default function App() {
           <Route path="changeusername" element={<ChangeUsername />} />
           <Route path="deleteaccount" element={<DeleteAccount />} />
           <Route path="userprofile" element={<UserProfile />} />
-          <Route path="adminlogin" element={<AdminLogin />} />
-          <Route path="adminpanel" element={<AdminPanel />} />
-          <Route path="adminchangepassword" element={<AdminChangePassword />} />
-          <Route path="createteamaccount" element={<CreateTeamAccount />} />
-          <Route path="teamlogin" element={<TeamLogin />} />
-          <Route path="teampanel" element={<TeamPanel />} />
-          <Route path="teamchangeemail" element={<TeamChangeEmail />} />
-          <Route path="teamchangepassword" element={<TeamChangePassword />} />
-          <Route path="sendcomplaint" element={<SendComplaint />} />
-          <Route path="seecomplaints" element={<SeeComplaints />} />
+          <Route path="standfix" element={<StandFix/>} />
+          <Route path="refereedata" element={<RefereeData/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
