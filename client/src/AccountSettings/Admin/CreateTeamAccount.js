@@ -49,7 +49,8 @@ export default function CreateTeamAccount() {
                       })
                       .then((res) => {
                           if (res && res.status === 200) {
-                              navigate("/teamlogin");
+                              alert("Account created.");
+                              navigate("/adminpanel");
                           } else {
                               alert("An error occurred while signing up, please try again.");
                           }
