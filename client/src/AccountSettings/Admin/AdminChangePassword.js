@@ -12,7 +12,7 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export default function ChangePassword() {
+export default function AdminChangePassword() {
     const location = useLocation();
     const navigate = useNavigate();
     const handleSubmit = (event) => {
@@ -37,13 +37,13 @@ export default function ChangePassword() {
 
         axios
             .put("/api/v1", {
-                _collection: "users",
+                _collection: "admin",
                 _id: location.state._id,
                 password: data.get("new_password"),
             })
             .catch((err) => {
                 console.log(err);
-                alert("An error occurred while signing up, please try again.");
+                alert("There was an error changing the password, please try again.");
             })
             .then((res) => {
                 if (res && res.status === 200) {
@@ -137,10 +137,10 @@ export default function ChangePassword() {
                                         <Grid item>
                                             <Button
                                                 onClick={() =>
-                                                    navigate("/accountsettings", {state: location.state})
+                                                    navigate("/adminpanel", {state: location.state})
                                                 }
                                             >
-                                                Return to account settings
+                                                Return to the admin panel
                                             </Button>
                                         </Grid>
                                     </Grid>

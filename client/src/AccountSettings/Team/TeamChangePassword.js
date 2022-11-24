@@ -12,56 +12,47 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export default function ChangeEmail() {
+export default function TeamChangePassword() {
     const location = useLocation();
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        if (!data.get("new_email")) {
-            alert("Please enter a new email");
+        if (!data.get("password") || !data.get("new_password") || !data.get("confirm_password")) {
+            alert("Please make sure all forms are filled.");
             return;
         }
-        if (data.get("new_email") === location.state.email) {
-            alert("New email cannot be the same as the old email");
+        if (data.get("new_password") !== data.get("confirm_password")) {
+            alert("The new password and confirm password fields should match.");
+            return;
+        }
+        if (data.get("new_password") === location.state.password) {
+            alert("The new and old passwords cannot be the same.");
+            return;
+        }
+        if (location.state.password !== data.get("password")) {
+            alert("Please check your password.");
             return;
         }
 
         axios
-            .get("/api/v1", {
-                params: {
-                    _collection: "users",
-                    email: data.get("email"),
-                },
+            .put("/api/v1", {
+                _collection: "team_accounts",
+                _id: location.state._id,
+                password: data.get("new_password"),
             })
             .catch((err) => {
                 console.log(err);
+                alert("There was an error changing the password, please try again.");
             })
             .then((res) => {
-                if (res.data.items.length !== 0) {
-                    alert("Email is already in use.");
-                    return;
+                if (res && res.status === 200) {
+                    location.state.password = data.get("new_password");
+                    alert("Password changed successfully!");
                 }
-
-                axios
-                    .put("/api/v1", {
-                        _collection: "users",
-                        _id: location.state._id,
-                        email: data.get("new_email"),
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-                    .then((res) => {
-                        if (res && res.status === 200) {
-                            location.state.email = data.get("new_email");
-                            alert("Email changed successfully");
-                        } else {
-                            alert("Error changing email.");
-                        }
-                    });
             });
     };
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: "15vh" }}>
@@ -86,7 +77,7 @@ export default function ChangeEmail() {
                                 }}
                             >
                                 <Typography component="h1" variant="h5">
-                                    Edit Email Address
+                                    Change Password
                                 </Typography>
                                 <Typography
                                     variant="h5"
@@ -94,7 +85,7 @@ export default function ChangeEmail() {
                                     color="textSecondary"
                                     paragraph
                                 >
-                                    You can change your email address in this page.
+                                    You can change your password in this page.
                                 </Typography>
                                 <Box
                                     component="form"
@@ -106,10 +97,31 @@ export default function ChangeEmail() {
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="new_email"
-                                        label="New Email"
-                                        name="new_email"
-                                        autoComplete="email"
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="new_password"
+                                        label="New Password"
+                                        type="password"
+                                        name="new_password"
+                                        autoComplete="new_password"
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="confirm_password"
+                                        label="Confirm Password"
+                                        type="password"
+                                        name="confirm_password"
+                                        autoComplete="confirm_password"
                                         autoFocus
                                     />
                                     <Button
@@ -125,12 +137,10 @@ export default function ChangeEmail() {
                                         <Grid item>
                                             <Button
                                                 onClick={() =>
-                                                    navigate("/accountsettings", {
-                                                        state: location.state,
-                                                    })
+                                                    navigate("/teampanel", {state: location.state})
                                                 }
                                             >
-                                                Return to account settings
+                                                Return to the team panel
                                             </Button>
                                         </Grid>
                                     </Grid>
