@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Divider, List, ListItemButton } from "@mui/material";
 import UserMenu from "../UserMenu/UserMenu";
+import { Chart } from "react-google-charts";
 
 const theme = createTheme();
 
@@ -72,7 +73,7 @@ export default function HomePage() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={() => navigate("/survey", { state: location.state })}
+                  onClick={() => navigate("/surveyvisuals")}
                 >
                   Surveys
                 </Button>
@@ -106,7 +107,7 @@ export default function HomePage() {
                 </Button>
               </ListItemButton>
 
-              {location.state.username ? (
+              {location.state && location.state.username ? (
                 <ListItemButton>
                   <Button
                     type="submit"

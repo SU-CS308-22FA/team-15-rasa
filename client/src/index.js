@@ -12,6 +12,7 @@ import HomePage from "./Home/HomePage";
 import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
 import MySurvey from "./Misc/Survey";
+import SurveyVisuals from "./Misc/SurveyVisuals";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="deleteaccount" element={<DeleteAccount />} />
           <Route path="userprofile" element={<UserProfile />} />
           <Route path="survey" element={<MySurvey />} />
+          <Route path="surveyvisuals" element={<SurveyVisuals />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

@@ -3,61 +3,61 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 
 const theme = createTheme();
 
 export default function Signup() {
-    const navigate = useNavigate();
-    const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!data.get("username") || !data.get("email") || !data.get("password")) {
-        alert("Invalid username, email or password");
-        return;
+      alert("Invalid username, email or password");
+      return;
     }
 
     axios
-        .get("/api/v1", {
-            params: {
-                _collection: "users",
-                email: data.get("email"),
-            },
-        })
-        .catch((err) => {
+      .get("/api/v1", {
+        params: {
+          _collection: "users",
+          email: data.get("email"),
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((res) => {
+        if (res.data.items.length !== 0) {
+          alert("Email already exists");
+          return;
+        }
+        axios
+          .post("/api/v1", {
+            _collection: "users",
+            username: data.get("username"),
+            email: data.get("email"),
+            password: data.get("password"),
+          })
+          .catch((err) => {
             console.log(err);
-        })
-        .then((res) => {
-            if (res.data.items.length !== 0) {
-                alert("Email already exists");
-                return;
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              navigate("/signin");
+            } else {
+              alert("An error occurred while signing up, please try again.");
             }
-            axios
-                .post("/api/v1", {
-                    _collection: "users",
-                    username: data.get("username"),
-                    email: data.get("email"),
-                    password: data.get("password"),
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .then((res) => {
-                    if (res.status === 200) {
-                        navigate("/signin");
-                    } else {
-                        alert("An error occurred while signing up, please try again.");
-                    }
-                });
-        });
-    };
+          });
+      });
+  };
 
-    return (
+  return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -145,5 +145,5 @@ export default function Signup() {
         </Grid>
       </Grid>
     </ThemeProvider>
-    );
+  );
 }

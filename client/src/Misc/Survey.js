@@ -7,6 +7,7 @@ import "survey-core/defaultV2.min.css";
 import { StylesManager, Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // const SURVEY_ID = 1;
 
@@ -26,40 +27,52 @@ const surveyJson = {
       maxRateDescription: "(Great)",
     },
     {
-      type: "checkbox",
-      name: "checkbox1",
-      title: "On which fields was the referee lacking?",
-      description: "Please select no more than three features.",
+      type: "rating",
+      name: "rating2",
+      title:
+        "On a scale of zero to ten, how would you rate the referee's foul calls in your team's game?",
       isRequired: true,
-      showOtherItem: true,
-      choices: [
-        "Foul calls",
-        "Bookings",
-        "Handballs",
-        "Consistency of the decisions",
-        "Maintaining the tempo of the game",
-      ],
-      colCount: 2,
-    },
-    {
-      type: "checkbox",
-      name: "checkbox2",
-      title: "On which fields was the referee succesful?",
-      description: "Please select no more than three features.",
-      isRequired: true,
-      showOtherItem: true,
-      choices: [
-        "Foul calls",
-        "Bookings",
-        "Handballs",
-        "Consistency of the decisions",
-        "Maintaining the tempo of the game",
-      ],
-      colCount: 2,
+      rateMin: 0,
+      rateMax: 10,
+      minRateDescription: "(Terrible)",
+      maxRateDescription: "(Great)",
     },
     {
       type: "rating",
-      name: "rating2",
+      name: "rating3",
+      title:
+        "On a scale of zero to ten, how would you rate the referee's booking calls in your team's game?",
+      isRequired: true,
+      rateMin: 0,
+      rateMax: 10,
+      minRateDescription: "(Terrible)",
+      maxRateDescription: "(Great)",
+    },
+    {
+      type: "rating",
+      name: "rating4",
+      title:
+        "On a scale of zero to ten, how would you rate the referee's effort in maintaining the tempo of the game?",
+      isRequired: true,
+      rateMin: 0,
+      rateMax: 10,
+      minRateDescription: "(Terrible)",
+      maxRateDescription: "(Great)",
+    },
+    {
+      type: "rating",
+      name: "rating5",
+      title:
+        "On a scale of zero to ten, how would you rate the consistency of the referee's decisions?",
+      isRequired: true,
+      rateMin: 0,
+      rateMax: 10,
+      minRateDescription: "(Terrible)",
+      maxRateDescription: "(Great)",
+    },
+    {
+      type: "rating",
+      name: "rating6",
       title:
         "On a scale of zero to ten, how would you rate the referee assignments this week?",
       isRequired: true,
@@ -72,12 +85,15 @@ const surveyJson = {
 };
 
 function MySurvey() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const survey = new Model(surveyJson);
   const alertResults = useCallback((sender) => {
-    sender.data["_collections"] = "survey";
-    axios.post("/api/v1", sender.data);
-    const results = JSON.stringify(sender.data);
-    alert(results);
+    let temp = sender.data;
+    temp["_collection"] = "survey";
+    axios.post("/api/v1", temp);
+    navigate("/", { state: location.state });
+
     // saveSurveyResults(
     //   "https://your-web-service.com/" + SURVEY_ID,
     //   sender.data
