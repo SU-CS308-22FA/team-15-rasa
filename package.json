@@ -5,18 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-client": "cd client && npm run build",
-    "build-team": "cd team && npm run build",
-    "build-admin": "cd admin && npm run build",
+    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "install-team": "cd team && npm install",
-    "install-admin": "cd admin && npm install",
-    "heroku-postbuild": "npm run install-client && npm run install-team && npm run install-admin && npm run build-client && npm run build-team && npm run build-team",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
     "client": "cd client && npm start",
-    "admin": "cd admin && npm start",
-    "team": "cd team && npm start",
-    "dev": "concurrently -n server,client -c 'red,green' \"nodemon server.js\" \"npm run client\""
+    "dev": "concurrently -n server,client -c 'red,green'  \"nodemon server.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

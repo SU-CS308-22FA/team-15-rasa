@@ -26,6 +26,8 @@ import SendComplaint from "./TeamPanel/SendComplaint";
 import TeamChangePassword from "./AccountSettings/Team/TeamChangePassword";
 import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
 
+import MySurvey from "./Misc/Survey";
+import SurveyVisuals from "./Misc/SurveyVisuals";
 
 export default function App() {
   return (
@@ -53,6 +55,8 @@ export default function App() {
           <Route path="sendcomplaint" element={<SendComplaint/>} />
           <Route path="teamchangepassword" element={<TeamChangePassword/>} />
           <Route path="teamchangeemail" element={<TeamChangeEmail/>} />
+          <Route path="survey" element={<MySurvey />} />
+          <Route path="surveyvisuals" element={<SurveyVisuals />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

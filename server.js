@@ -7,10 +7,12 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 const MongoClient = mongodb.MongoClient;
-const uri = process.env.USERS_DB_URI || "mongodb+srv://rasaReadWrite:T9AxKEQTnw5gYn0B@rasacluster.dxdtcrw.mongodb.net/users?retryWrites=true&w=majority";
+const uri =
+  process.env.USERS_DB_URI ||
+  "mongodb+srv://rasaReadWrite:T9AxKEQTnw5gYn0B@rasacluster.dxdtcrw.mongodb.net/users?retryWrites=true&w=majority";
 
 MongoClient.connect(uri)
   .catch((err) => {
