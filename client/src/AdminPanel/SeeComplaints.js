@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AppBar, Toolbar,} from "@mui/material";
-import CompList from "./CompList"
 import React, { useState } from "react";
 import axios from "axios";
 
