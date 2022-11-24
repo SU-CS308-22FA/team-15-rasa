@@ -4,10 +4,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
-import UserMenu from "../UserMenu/UserMenu";
-import Box from "@mui/material/Box";
 
-export default function AccountSettings() {
+export default function TeamPanel() {
   const location = useLocation();
   const navigate = useNavigate();
   return (
@@ -16,40 +14,16 @@ export default function AccountSettings() {
       <AppBar position="relative">
         <Toolbar>
           <Typography component="h1" variant="h5">
-            Account Settings
+            Rasa Team Panel
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box
-        sx={{
-          my: 3,
-          mx: 3,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-        }}
-      >
-        {UserMenu()}
-      </Box>
       <main>
         <div>
           <Container maxWidth="sm">
-            <Typography
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterbottom="true"
-            >
-              Edit Account Settings
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              You can change your account settings in this page.
-            </Typography>
+            <div>
+              <p>Logged in as {location.state.email}</p>
+            </div>
             <div>
               <List
                 sx={{ mt: 3, mb: 2 }}
@@ -63,26 +37,13 @@ export default function AccountSettings() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/changeemail", { state: location.state })
+                      navigate("/teamchangeemail", { state: location.state })
                     }
                   >
                     Change Email
                   </Button>
                 </ListItemButton>
                 <Divider />
-                <ListItemButton divider>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={() =>
-                      navigate("/changeusername", { state: location.state })
-                    }
-                  >
-                    Change Username
-                  </Button>
-                </ListItemButton>
                 <ListItemButton>
                   <Button
                     type="submit"
@@ -90,13 +51,13 @@ export default function AccountSettings() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/changepassword", { state: location.state })
+                      navigate("/teamchangepassword", { state: location.state })
                     }
                   >
                     Change Password
                   </Button>
                 </ListItemButton>
-                <Divider light />
+                <Divider />
                 <ListItemButton>
                   <Button
                     type="submit"
@@ -104,10 +65,10 @@ export default function AccountSettings() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
-                      navigate("/deleteaccount", { state: location.state })
+                      navigate("/sendcomplaint", { state: location.state })
                     }
                   >
-                    Delete account
+                    Send Complaint
                   </Button>
                 </ListItemButton>
                 <Divider light />
@@ -117,9 +78,9 @@ export default function AccountSettings() {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    onClick={() => navigate("/", { state: location.state })}
+                    onClick={() => navigate("/")}
                   >
-                    Home Page
+                    Log out
                   </Button>
                 </ListItemButton>
               </List>
