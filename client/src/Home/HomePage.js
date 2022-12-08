@@ -120,6 +120,28 @@ export default function HomePage() {
                     Take the survey
                   </Button>
                 </ListItemButton>
+
+                
+              ) : (
+                <></>
+              )}
+
+              {location.state && location.state.username ? (
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() =>
+                      navigate("/fancomplaint", { state: location.state })
+                    }
+                  >
+                    Send Complaint
+                  </Button>
+                </ListItemButton>
+
+                
               ) : (
                 <></>
               )}
