@@ -16,7 +16,7 @@ export default function FanComplaint() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        if (!data.get("ref_name")) {
+        if (!data.get("explanation")) {
             alert("Please enter a valid complaint.");
             return;
         }
@@ -30,7 +30,7 @@ export default function FanComplaint() {
             })
             .then((res) => {
                 if (res && res.status === 200) {
-                    navigate("/homepage", { state: location.state });
+                    navigate("/", { state: location.state });
                     alert("Complaint sent.");
                 } else {
                     alert("An error occurred, please try again.");

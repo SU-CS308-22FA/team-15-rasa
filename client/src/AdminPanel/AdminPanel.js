@@ -56,6 +56,20 @@ export default function AdminPanel() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
+                      navigate("/seefancomplaints", { state: location.state })
+                    }
+                  >
+                    See Fan Complaints
+                  </Button>
+                </ListItemButton>
+                <Divider />
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() =>
                       navigate("/createteamaccount", { state: location.state })
                     }
                   >
