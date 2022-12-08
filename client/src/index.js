@@ -13,6 +13,7 @@ import NoPage from "./Misc/NoPage";
 import UserProfile from "./Profile/User/UserProfile";
 import StandFix from "./FixtureStanding/StandFix";
 import RefereeData from "./Referee/RefereeData";
+import FanComplaint from "./Misc/FanComplaint";
 
 import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="teamchangeemail" element={<TeamChangeEmail/>} />
           <Route path="survey" element={<MySurvey />} />
           <Route path="surveyvisuals" element={<SurveyVisuals />} />
+          <Route path="fancomplaint" element={<FanComplaint/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
