@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function UserMenu() {
   const navigate = useNavigate();
@@ -28,6 +28,10 @@ export default function UserMenu() {
     setAnchorEl(null);
     navigate("/accountsettings", { state: location.state });
   };
+  const handleHome = () => {
+    setAnchorEl(null);
+    navigate("/", { state: location.state });
+  };
 
   return (
     <div>
@@ -42,7 +46,14 @@ export default function UserMenu() {
           {location.state.username}
         </Button>
       ) : (
-        <Link to="/signin">Sign in</Link>
+        <Button
+          onClick={() => {
+            navigate("/signin", { state: { ...location.state, from: location.pathname } })
+          }
+        }
+        >
+            Sign In
+        </Button>
       )}
 
       <Menu
@@ -56,6 +67,11 @@ export default function UserMenu() {
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
         <MenuItem onClick={handleAccountSettings}>Account Settings</MenuItem>
+        {
+          location.pathname && location.pathname !== "/" ?
+              <MenuItem onClick={handleHome}>Home Page</MenuItem>
+              : null
+        }
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>

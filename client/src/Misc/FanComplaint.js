@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
+import UserMenu from "../UserMenu/UserMenu";
 
 const theme = createTheme();
 
@@ -41,6 +42,17 @@ export default function FanComplaint() {
   return (
     <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Box
+            sx={{
+                my: 3,
+                mx: 3,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+            }}
+        >
+            <UserMenu/>
+        </Box>
           <Box
             sx={{
               my: 8,
