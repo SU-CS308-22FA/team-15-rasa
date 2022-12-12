@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {Divider, List, ListItemButton} from '@mui/material';
+import {List, ListItemButton} from '@mui/material';
 import UserMenu from "../UserMenu/UserMenu";
 
 const theme = createTheme();
@@ -66,7 +66,18 @@ export default function HomePage() {
               scomponent="nav"
               aria-label="mailbox folders"
             >
-              <ListItemButton>
+                <ListItemButton divider>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => navigate("/refassignmentvisualization", { state: location.state }) }
+                    >
+                        Referee Assignments
+                    </Button>
+                </ListItemButton>
+              <ListItemButton divider>
                 <Button
                   type="submit"
                   fullWidth
@@ -77,7 +88,6 @@ export default function HomePage() {
                   Surveys
                 </Button>
               </ListItemButton>
-              <Divider />
               <ListItemButton divider>
                 <Button
                   type="submit"
@@ -91,8 +101,7 @@ export default function HomePage() {
                   Fixture and Standings
                 </Button>
               </ListItemButton>
-              <Divider />
-              <ListItemButton>
+              <ListItemButton divider>
                 <Button
                   type="submit"
                   fullWidth
@@ -105,9 +114,8 @@ export default function HomePage() {
                   Referee stats
                 </Button>
               </ListItemButton>
-
               {location.state && location.state.username ? (
-                <ListItemButton>
+                <ListItemButton divider>
                   <Button
                     type="submit"
                     fullWidth
@@ -120,14 +128,13 @@ export default function HomePage() {
                     Take the survey
                   </Button>
                 </ListItemButton>
-
                 
               ) : (
                 <></>
               )}
 
               {location.state && location.state.username ? (
-                <ListItemButton>
+                <ListItemButton divider>
                   <Button
                     type="submit"
                     fullWidth

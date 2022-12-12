@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import PieChart, {
   Series,
   Label,
@@ -8,10 +7,10 @@ import PieChart, {
   Export,
 } from "devextreme-react/pie-chart";
 import axios from "axios";
-import Button from "@mui/material/Button";
 import groupBy from "lodash.groupby";
-import Stack from "react-bootstrap/Stack";
-export default class SurveyVisuals extends React.PureComponent {
+import Box from "@mui/material/Box";
+
+class SurveyVisualsClass extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,78 +31,27 @@ export default class SurveyVisuals extends React.PureComponent {
         console.log(err);
       })
       .then((res) => {
-        var groupedData = groupBy(res.data.items, "rating1");
-        console.log(groupedData);
-        let newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
+        let allData = [];
+        for (let i = 1; i < res.data.items.length + 1; i++) {
+          const groupedData = groupBy(res.data.items, `rating${i}`);
+          let newData = [];
+          Object.keys(groupedData).forEach(function (key, index) {
+            let obj = {};
+            obj["count"] = groupedData[key].length;
+            obj["key"] = key;
+            newData.push(obj);
+          });
+          allData.push(newData);
+        }
         this.setState({
-          data: newData,
+          data: allData[0],
+          data2: allData[1],
+          data3: allData[2],
+          data4: allData[3],
+          data5: allData[4],
+          data6: allData[5],
         });
-        groupedData = groupBy(res.data.items, "rating2");
-        console.log(groupedData);
-        newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
-        this.setState({
-          data2: newData,
-        });
-        groupedData = groupBy(res.data.items, "rating3");
-        console.log(groupedData);
-        newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
-        this.setState({
-          data3: newData,
-        });
-        groupedData = groupBy(res.data.items, "rating4");
-        console.log(groupedData);
-        newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
-        this.setState({
-          data4: newData,
-        });
-        groupedData = groupBy(res.data.items, "rating5");
-        console.log(groupedData);
-        newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
-        this.setState({
-          data5: newData,
-        });
-        groupedData = groupBy(res.data.items, "rating6");
-        console.log(groupedData);
-        newData = [];
-        Object.keys(groupedData).forEach(function (key, index) {
-          let obj = {};
-          obj["count"] = groupedData[key].length;
-          obj["key"] = key;
-          newData.push(obj);
-        });
-        this.setState({
-          data6: newData,
-        });
+        console.log(this.state);
       });
   }
   render() {
@@ -201,10 +149,25 @@ export default class SurveyVisuals extends React.PureComponent {
           <Size width={500} />
           <Export enabled={true} />
         </PieChart>
-        <div>
-          <Link to="/">Return to home page</Link>
-        </div>
       </div>
     );
   }
+}
+
+export default function SurveyVisuals() {
+  return (
+    <div>
+      <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+      >
+        <SurveyVisualsClass />
+      </Box>
+    </div>
+  );
 }

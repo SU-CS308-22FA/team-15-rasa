@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,6 +13,7 @@ import axios from "axios";
 const theme = createTheme();
 
 export default function Signin() {
+    const location = useLocation();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +42,12 @@ export default function Signin() {
             return;
         }
         if (res) {
-            navigate("/", { state: res.data.items[0] });
+            if (location.state && location.state.from) {
+                navigate(location.state.from, { state: { ...location.state, ...res.data.items[0]} });
+            }
+            else {
+                navigate("/", { state: { ...location.state, ...res.data.items[0]} });
+            }
         } else {
             alert("There was an error. Please try again.");
         }
