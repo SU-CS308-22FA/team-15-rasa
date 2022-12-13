@@ -31,7 +31,7 @@ import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
 
 import MySurvey from "./Misc/Survey";
 import SurveyVisuals from "./Misc/SurveyVisuals";
-import RefereeAssignmentVisualization from "./Referee/RefAssignmen/RefAssignmentVisualization";
+import RefereeAssignmentVisualization from "./Referee/RefAssignment/RefAssignmentVisualization";
 
 export default function App() {
   return (
