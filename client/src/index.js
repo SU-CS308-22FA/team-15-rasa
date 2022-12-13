@@ -32,6 +32,8 @@ import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
 import MySurvey from "./Misc/Survey";
 import SurveyVisuals from "./Misc/SurveyVisuals";
 import RefereeAssignmentVisualization from "./Referee/RefAssignment/RefAssignmentVisualization";
+import RefereeAssignmentComments from "./Referee/RefAssignment/RefAssignmentComments";
+import RefereeAssignmentWriteComment from "./Referee/RefAssignment/RefAssignmentWriteComment";
 
 export default function App() {
   return (
@@ -65,6 +67,8 @@ export default function App() {
           <Route path="surveyvisuals" element={<SurveyVisuals />} />
           <Route path="fancomplaint" element={<FanComplaint/>} />
           <Route path="refassignmentvisualization" element={<RefereeAssignmentVisualization/>} />
+          <Route path="refassignmentcomments" element={<RefereeAssignmentComments/>} />
+          <Route path="refassignmentwritecomment" element={<RefereeAssignmentWriteComment/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
