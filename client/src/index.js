@@ -2,6 +2,7 @@ import {createRoot} from "react-dom/client";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./Components/Layout";
 import Signin from "./Auth/User/Signin";
+import ForgotPassword from "./Auth/User/ForgotPassword";
 import Signup from "./Auth/User/Signup.js";
 import ChangeEmail from "./AccountSettings/User/ChangeEmail";
 import ChangePassword from "./AccountSettings/User/ChangePassword";
@@ -39,6 +40,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
           <Route path="accountsettings" element={<UserAccountSettings />} />
           <Route path="changeemail" element={<ChangeEmail />} />
           <Route path="changepassword" element={<ChangePassword />} />
