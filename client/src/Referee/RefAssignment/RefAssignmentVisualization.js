@@ -7,7 +7,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import Paper from "@mui/material/Paper";
-
+import CommentIcon from '@mui/icons-material/Comment';
+import Button from "@mui/material/Button";
 
 export default function RefereeAssignmentVisualization() {
     const location = useLocation();
@@ -70,6 +71,7 @@ export default function RefereeAssignmentVisualization() {
                     <TableCell align="center">Home</TableCell>
                     <TableCell align="center">Away</TableCell>
                     <TableCell align="center">Referee</TableCell>
+                    <TableCell align="center">Comments</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -81,6 +83,30 @@ export default function RefereeAssignmentVisualization() {
                         <TableCell align="center">{row.home}</TableCell>
                         <TableCell align="center">{row.away}</TableCell>
                         <TableCell align="center">{row.referee}</TableCell>
+                        <TableCell align="center">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                startIcon={<CommentIcon />}
+                                onClick={
+                                    () => navigate("/refassignmentcomments",
+                                        {
+                                            state:
+                                                {
+                                                    ...location.state,
+                                                    ...{
+                                                        match_id: row._id,
+                                                        referee: row.referee,
+                                                        home: row.home,
+                                                        away: row.away,
+                                                    }
+                                            },
+                                        })
+                                }
+                            >
+                                Check Comments
+                            </Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
