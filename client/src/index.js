@@ -1,5 +1,5 @@
-import {createRoot} from "react-dom/client";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Signin from "./Auth/User/Signin";
 import Signup from "./Auth/User/Signup.js";
@@ -34,43 +34,78 @@ import RefereeAssignmentVisualization from "./Referee/RefAssignment/RefAssignmen
 import RefereeAssignmentComments from "./Referee/RefAssignment/RefAssignmentComments";
 import RefereeAssignmentWriteComment from "./Referee/RefAssignment/RefAssignmentWriteComment";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+export const light = {
+  palette: {
+    mode: "light",
+  },
+};
+export const dark = {
+  palette: {
+    mode: "dark",
+  },
+};
 export default function App() {
+  const [theme, setTheme] = useState(true);
+  let appliedTheme = createTheme();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="signin" element={<Signin />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="accountsettings" element={<UserAccountSettings />} />
-          <Route path="changeemail" element={<ChangeEmail />} />
-          <Route path="changepassword" element={<ChangePassword />} />
-          <Route path="changeusername" element={<ChangeUsername />} />
-          <Route path="deleteaccount" element={<DeleteAccount />} />
-          <Route path="userprofile" element={<UserProfile />} />
-          <Route path="standfix" element={<StandFix/>} />
-          <Route path="refereedata" element={<RefereeData/>} />
-          <Route path="adminlogin" element={<AdminLogin/>} />
-          <Route path="adminpanel" element={<AdminPanel/>} />
-          <Route path="seecomplaints" element={<SeeComplaints/>} />
-          <Route path="seefancomplaints" element={<SeeFanComplaints/>} />
-          <Route path="createteamaccount" element={<CreateTeamAccount/>} />
-          <Route path="adminchangepassword" element={<AdminChangePassword/>} />
-          <Route path="teamlogin" element={<TeamLogin/>} />
-          <Route path="teampanel" element={<TeamPanel/>} />
-          <Route path="sendcomplaint" element={<SendComplaint/>} />
-          <Route path="teamchangepassword" element={<TeamChangePassword/>} />
-          <Route path="teamchangeemail" element={<TeamChangeEmail/>} />
-          <Route path="survey" element={<MySurvey />} />
-          <Route path="surveyvisuals" element={<SurveyVisuals />} />
-          <Route path="fancomplaint" element={<FanComplaint/>} />
-          <Route path="refassignmentvisualization" element={<RefereeAssignmentVisualization/>} />
-          <Route path="refassignmentcomments" element={<RefereeAssignmentComments/>} />
-          <Route path="refassignmentwritecomment" element={<RefereeAssignmentWriteComment/>} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme ? createTheme(light) : createTheme(dark)}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="signin" element={<Signin />} />
+            <Route path="signup" element={<Signup />} />
+            <Route
+              path="accountsettings"
+              element={
+                <UserAccountSettings state={theme} stateChanger={setTheme} />
+              }
+            />
+            <Route path="changeemail" element={<ChangeEmail />} />
+            <Route path="changepassword" element={<ChangePassword />} />
+            <Route path="changeusername" element={<ChangeUsername />} />
+            <Route path="deleteaccount" element={<DeleteAccount />} />
+            <Route path="userprofile" element={<UserProfile />} />
+            <Route path="standfix" element={<StandFix />} />
+            <Route path="refereedata" element={<RefereeData />} />
+            <Route path="adminlogin" element={<AdminLogin />} />
+            <Route path="adminpanel" element={<AdminPanel />} />
+            <Route path="seecomplaints" element={<SeeComplaints />} />
+            <Route path="seefancomplaints" element={<SeeFanComplaints />} />
+            <Route path="createteamaccount" element={<CreateTeamAccount />} />
+            <Route
+              path="adminchangepassword"
+              element={<AdminChangePassword />}
+            />
+            <Route path="teamlogin" element={<TeamLogin />} />
+            <Route path="teampanel" element={<TeamPanel />} />
+            <Route path="sendcomplaint" element={<SendComplaint />} />
+            <Route path="teamchangepassword" element={<TeamChangePassword />} />
+            <Route path="teamchangeemail" element={<TeamChangeEmail />} />
+            <Route path="survey" element={<MySurvey />} />
+            <Route path="surveyvisuals" element={<SurveyVisuals />} />
+            <Route path="fancomplaint" element={<FanComplaint />} />
+            <Route
+              path="refassignmentvisualization"
+              element={<RefereeAssignmentVisualization />}
+            />
+            <Route
+              path="refassignmentcomments"
+              element={<RefereeAssignmentComments />}
+            />
+            <Route
+              path="refassignmentwritecomment"
+              element={<RefereeAssignmentWriteComment />}
+            />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
