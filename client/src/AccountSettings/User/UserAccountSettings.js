@@ -2,14 +2,24 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {useLocation, useNavigate} from "react-router-dom";
-import {AppBar, Container, Divider, List, ListItemButton, Toolbar,} from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  AppBar,
+  Container,
+  Divider,
+  List,
+  ListItemButton,
+  Toolbar,
+} from "@mui/material";
 import UserMenu from "../../UserMenu/UserMenu";
 import Box from "@mui/material/Box";
+import { ThemeProvider } from "@mui/material/styles";
+import App from "../../index";
 
-export default function UserAccountSettings() {
+const UserAccountSettings = ({ state, stateChanger }) => {
   const location = useLocation();
   const navigate = useNavigate();
+
   return (
     <>
       <CssBaseline />
@@ -122,6 +132,20 @@ export default function UserAccountSettings() {
                     Home Page
                   </Button>
                 </ListItemButton>
+                <Divider light />
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => {
+                      stateChanger(!state);
+                    }}
+                  >
+                    Night/Day mode
+                  </Button>
+                </ListItemButton>
               </List>
             </div>
           </Container>
@@ -129,4 +153,5 @@ export default function UserAccountSettings() {
       </main>
     </>
   );
-}
+};
+export default UserAccountSettings;
