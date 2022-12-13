@@ -132,6 +132,10 @@ export default function Signin() {
               <Grid item>
                 <Link to="/signup">Sign up</Link>
               </Grid>
+              <Grid item xs></Grid>
+                <Grid item>
+                    <Link to="/forgotpassword">Forgot password?</Link>
+                </Grid>
             </Grid>
           </Box>
         </Box>

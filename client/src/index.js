@@ -59,6 +59,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="signin" element={<Signin />} />
+            <Route path="forgotpassword" element={<ForgotPassword />} />
             <Route path="signup" element={<Signup />} />
             <Route
               path="accountsettings"
