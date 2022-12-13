@@ -9,16 +9,17 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import axios from "axios";
+import emailjs from "emailjs-com";
 
 const theme = createTheme();
 
-export default function Signin() {
+export default function ForgotPassword() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!data.get("email") || !data.get("password")) {
-        alert("Invalid email or password");
+    if (!data.get("email")) {
+        alert("Invalid email");
         return;
     }
     axios
@@ -34,14 +35,35 @@ export default function Signin() {
       .then((res) => {
         if (
             res &&
-            (res.data.items.length === 0 ||
-            res.data.items[0].password !== data.get("password"))
+            (res.data.items.length === 0)
         ) {
-            alert("Invalid email or password");
+            alert("Invalid email");
             return;
         }
         if (res) {
-            navigate("/", { state: res.data.items[0] });
+            var mailparams = {
+                to_name: res.data.items[0].username,
+                new_password: Math.floor((Math.random() * 9999) + 1000).toString(),
+                email: data.get("email")
+            }
+            console.log(mailparams.new_password);
+
+            axios
+                .put("/api/v1", {
+                    _collection: "users",
+                    _id:  res.data.items[0]._id,
+                    password: mailparams.new_password,
+                });
+
+            emailjs.send('service_9jnl1hv', 'template_6tlwdfg', mailparams, '-MSMiMIn7nh6SMA04')
+                .then((result) => {
+                    console.log(result.text);
+                }, (error) => {
+                    console.log(error.text);
+                    alert(error);
+                });
+            alert("Check your e-mail.");
+            navigate("/");
         } else {
             alert("There was an error. Please try again.");
         }
@@ -80,7 +102,7 @@ export default function Signin() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Sign in
+              Enter your e-mail
             </Typography>
             <Box
               component="form"
@@ -98,37 +120,14 @@ export default function Signin() {
                 autoComplete="email"
                 autoFocus
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Send
               </Button>
-              <Grid container>
-                <Grid item>
-                  <Link to="/">Home Page</Link>
-                </Grid>
-                <Grid item xs></Grid>
-                <Grid item>
-                    <Link to="/signup">Sign up</Link>
-                </Grid>
-                <Grid item xs></Grid>
-                <Grid item>
-                    <Link to="/forgotpassword">Forgot password?</Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Grid>
