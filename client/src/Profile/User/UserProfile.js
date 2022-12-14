@@ -29,9 +29,9 @@ export default function UserProfile() {
 
     axios
       .put("/api/v1", {
-        _collection: "surveys",
+        _collection: "users",
         _id: location.state._id,
-        name: data.get("realName"),
+        real_name: data.get("realName"),
         team: selected.label,
         age: data.get("age"),
       })
