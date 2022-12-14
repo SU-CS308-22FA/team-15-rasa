@@ -8,8 +8,9 @@
     "@devexpress/dx-react-core": "^3.0.6",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@garvae/react-pie-chart": "^1.1.5-deprecated",
     "@mui/icons-material": "^5.10.14",
+    "@mui/material": "^5.10.14",
+    "@garvae/react-pie-chart": "^1.1.5-deprecated",
     "@mui/material": "^5.10.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -18,18 +19,19 @@
     "bootstrap": "^4.1.1",
     "devextreme": "^22.1.6",
     "devextreme-react": "^22.1.6",
-    "lodash.groupby": "^4.6.0",
-    "material-ui-popup-state": "^4.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-if": "^4.1.4",
     "react-loader-spinner": "^5.3.4",
+    "react-markdown": "^8.0.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
+    "react-simplemde-editor": "^5.2.0",
     "react-table": "^7.8.0",
+    "web-vitals": "^2.1.4",
     "survey-react-ui": "^1.9.59",
-    "web-vitals": "^2.1.4"
+    "lodash.groupby": "^4.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,5 +57,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000"
 }
