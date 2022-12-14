@@ -34,6 +34,8 @@ import SurveyVisuals from "./Misc/SurveyVisuals";
 import RefereeAssignmentVisualization from "./Referee/RefAssignment/RefAssignmentVisualization";
 import RefereeAssignmentComments from "./Referee/RefAssignment/RefAssignmentComments";
 import RefereeAssignmentWriteComment from "./Referee/RefAssignment/RefAssignmentWriteComment";
+import RefereeListDetails from "./RefereeListDetails/RefereeListDetails";
+import RefereeRankings from "./RefereeRankings/RefereeRankings";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
@@ -102,6 +104,8 @@ export default function App() {
               path="refassignmentwritecomment"
               element={<RefereeAssignmentWriteComment />}
             />
+            <Route path="refereelistdetails" element={<RefereeListDetails/>} />
+            <Route path="refereerankings" element={<RefereeRankings/>} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
