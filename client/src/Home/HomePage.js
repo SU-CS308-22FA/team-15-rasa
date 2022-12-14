@@ -86,6 +86,36 @@ export default function HomePage() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={() =>
+                  navigate("/refereelistdetails", {
+                    state: location.state,
+                  })
+                }
+              >
+                Referee List
+              </Button>
+            </ListItemButton>
+            <ListItemButton divider>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() =>
+                  navigate("/refereerankings", {
+                    state: location.state,
+                  })
+                }
+              >
+                Referee Assignments
+              </Button>
+            </ListItemButton>
+            <ListItemButton divider>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
                 onClick={() => navigate("/surveyvisuals")}
               >
                 Surveys
