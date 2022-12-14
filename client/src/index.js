@@ -18,6 +18,7 @@ import FanComplaint from "./Misc/FanComplaint";
 import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import SeeComplaints from "./AdminPanel/SeeComplaints";
+import SeeFanComplaints from "./AdminPanel/SeeFanComplaints";
 import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
 import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
 
@@ -26,6 +27,8 @@ import TeamPanel from "./TeamPanel/TeamPanel";
 import SendComplaint from "./TeamPanel/SendComplaint";
 import TeamChangePassword from "./AccountSettings/Team/TeamChangePassword";
 import TeamChangeEmail from "./AccountSettings/Team/TeamChangeEmail";
+import RefereeListDetails from "./RefereeListDetails/RefereeListDetails";
+import RefereeRankings from "./RefereeRankings/RefereeRankings";
 
 import MySurvey from "./Misc/Survey";
 import SurveyVisuals from "./Misc/SurveyVisuals";
@@ -49,6 +52,7 @@ export default function App() {
           <Route path="adminlogin" element={<AdminLogin/>} />
           <Route path="adminpanel" element={<AdminPanel/>} />
           <Route path="seecomplaints" element={<SeeComplaints/>} />
+          <Route path="seefancomplaints" element={<SeeFanComplaints/>} />
           <Route path="createteamaccount" element={<CreateTeamAccount/>} />
           <Route path="adminchangepassword" element={<AdminChangePassword/>} />
           <Route path="teamlogin" element={<TeamLogin/>} />
@@ -59,6 +63,8 @@ export default function App() {
           <Route path="survey" element={<MySurvey />} />
           <Route path="surveyvisuals" element={<SurveyVisuals />} />
           <Route path="fancomplaint" element={<FanComplaint/>} />
+          <Route path="refereelistdetails" element={<RefereeListDetails/>} />
+          <Route path="refereerankings" element={<RefereeRankings/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

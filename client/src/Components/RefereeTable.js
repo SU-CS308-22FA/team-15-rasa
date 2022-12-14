@@ -32,6 +32,10 @@ const GROUPED_COLUMNS= [
         Header:'Match Statistics',
         columns : [
             {
+                Header: 'Match Count',
+                accessor:'match_count'
+            },
+            {
                 Header: 'Number of Yellow Card',
                 accessor:'Number of Yellow Card'
             },

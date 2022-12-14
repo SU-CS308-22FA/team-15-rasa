@@ -68,7 +68,9 @@ export const FixturesTable = () => {
                                 <tr{...row.getRowProps()}>
                                     {row.cells.map((cell) => {
                                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        
                                     })}
+                                    <Button variant="contained" color="success">Ref Ranking</Button>
                                 </tr>
                             )
                         })

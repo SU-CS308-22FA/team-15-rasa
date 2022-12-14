@@ -1,4 +1,4 @@
-import * as React from "react";
+//import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -6,7 +6,7 @@ import {AppBar, Toolbar,} from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function SeeComplaints() {
+export default function SeeFanComplaints() {
   const location = useLocation();
   const navigate = useNavigate();
   const [complaintList, setComplaintList] = useState([]);
