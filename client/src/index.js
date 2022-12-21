@@ -40,6 +40,7 @@ import RefereeRankings from "./RefereeRankings/RefereeRankings";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import MatchView from "./LiveMatch/MatchView";
 export const light = {
   palette: {
     mode: "light",
@@ -106,6 +107,7 @@ export default function App() {
             />
             <Route path="refereelistdetails" element={<RefereeListDetails/>} />
             <Route path="refereerankings" element={<RefereeRankings/>} />
+            <Route path="matchview" element={<MatchView/>} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

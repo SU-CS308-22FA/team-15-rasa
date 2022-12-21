@@ -80,6 +80,21 @@ export default function HomePage() {
                 Referee Assignments
               </Button>
             </ListItemButton>
+              <ListItemButton divider>
+                  <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                      onClick={() =>
+                          navigate("/matchview", {
+                              state: location.state,
+                          })
+                      }
+                  >
+                      Match View
+                  </Button>
+              </ListItemButton>
             <ListItemButton divider>
               <Button
                 type="submit"
@@ -107,7 +122,7 @@ export default function HomePage() {
                   })
                 }
               >
-                Referee Assignments
+                Referee Rankings
               </Button>
             </ListItemButton>
             <ListItemButton divider>
