@@ -3,7 +3,7 @@ const mongodb = require("mongodb");
 const cors = require("cors");
 const dbRouter = require("./routes/db.route.js");
 const genericDAO = require("./dao/genericDAO.js");
-const sportRadarRouter = require("./routes/sportRadar.route.js");
+const sportRadarRouter = require("./routes/sportradar.route.js");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
