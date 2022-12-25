@@ -55,6 +55,3 @@ module.exports = class SportRadarScraper {
         }
     }
 }
-
-const scraper = require('../WebScraping/sportRadarScraper.js');
-scraper.getMatchData();
