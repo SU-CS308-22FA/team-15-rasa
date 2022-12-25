@@ -1,9 +1,9 @@
 import React, {useMemo} from 'react';
-import {useTable, useSortBy, useGlobalFilter, usePagination} from 'react-table';
+import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
 import RMOCK_DATA from './RMOCK_DATA.json';
 import '../CSS/Site.css';
 import Button from "@mui/material/Button";
-import { GlobalFilter } from './GlobalFilter';
+import {GlobalFilter} from './GlobalFilter';
 
 const GROUPED_COLUMNS= [
     {

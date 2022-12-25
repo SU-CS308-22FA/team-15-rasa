@@ -1,16 +1,16 @@
 import * as React from "react";
+import {useState} from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AppBar, Container, Toolbar } from "@mui/material";
+import {AppBar, Container, Toolbar} from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState } from "react";
 import axios from "axios";
+
 export default function UserProfile() {
   const navigate = useNavigate();
   const location = useLocation();

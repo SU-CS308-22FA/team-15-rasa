@@ -1,13 +1,13 @@
-import { useCallback } from "react";
+import {useCallback} from "react";
 
 // Default V2 theme
 import "survey-core/defaultV2.min.css";
 // Modern theme
 // import 'survey-core/modern.min.css';
-import { StylesManager, Model } from "survey-core";
-import { Survey } from "survey-react-ui";
+import {Model, StylesManager} from "survey-core";
+import {Survey} from "survey-react-ui";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 // const SURVEY_ID = 1;
 

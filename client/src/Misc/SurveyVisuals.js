@@ -1,11 +1,5 @@
 import * as React from "react";
-import PieChart, {
-  Series,
-  Label,
-  Connector,
-  Size,
-  Export,
-} from "devextreme-react/pie-chart";
+import PieChart, {Connector, Export, Label, Series, Size,} from "devextreme-react/pie-chart";
 import axios from "axios";
 import groupBy from "lodash.groupby";
 import Box from "@mui/material/Box";

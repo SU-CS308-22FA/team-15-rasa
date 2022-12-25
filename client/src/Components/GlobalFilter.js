@@ -2,6 +2,7 @@ import React from 'react'
 import InputLabel from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import SearchIcon from '@mui/icons-material/Search';
+
 export const GlobalFilter = ({filter, setFilter}) => {
   return (
     <span>

@@ -1,6 +1,6 @@
 // Page for writing comments on referee assignments
 import * as React from "react";
-import { useState } from "react";
+import {useState} from "react";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import Paper from "@mui/material/Paper";

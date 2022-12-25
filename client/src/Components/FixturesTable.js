@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
+import React, {useMemo} from 'react';
+import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
 import '../CSS/Site.css';
 import Button from "@mui/material/Button";
-import { GlobalFilter } from './GlobalFilter';
+import {GlobalFilter} from './GlobalFilter';
 import SMOCK_DATA from './FMOCK_DATA.json'
 
 const FixCOLUMNS = [

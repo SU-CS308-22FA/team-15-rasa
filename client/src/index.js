@@ -1,5 +1,5 @@
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {createRoot} from "react-dom/client";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./Components/Layout";
 import Signin from "./Auth/User/Signin";
 import ForgotPassword from "./Auth/User/ForgotPassword";
@@ -37,9 +37,11 @@ import RefereeAssignmentWriteComment from "./Referee/RefAssignment/RefAssignment
 import RefereeListDetails from "./RefereeListDetails/RefereeListDetails";
 import RefereeRankings from "./RefereeRankings/RefereeRankings";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState } from "react";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import React, {useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import MatchView from "./LiveMatch/MatchView";
+
 export const light = {
   palette: {
     mode: "light",
@@ -58,7 +60,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePage stateChanger={setTheme} />} />
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path="forgotpassword" element={<ForgotPassword />} />
@@ -106,6 +108,7 @@ export default function App() {
             />
             <Route path="refereelistdetails" element={<RefereeListDetails/>} />
             <Route path="refereerankings" element={<RefereeRankings/>} />
+            <Route path="matchview" element={<MatchView/>} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

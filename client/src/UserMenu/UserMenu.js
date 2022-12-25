@@ -2,9 +2,9 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
-export default function UserMenu() {
+export default function UserMenu({stateChanger}) {
   const navigate = useNavigate();
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +22,7 @@ export default function UserMenu() {
   const handleLogout = () => {
     location.state = null;
     setAnchorEl(null);
-    navigate("/");
+    navigate("/", { state: location.state });
   };
   const handleAccountSettings = () => {
     setAnchorEl(null);
