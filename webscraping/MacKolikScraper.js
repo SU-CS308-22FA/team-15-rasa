@@ -1,3 +1,4 @@
+/*
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 
@@ -34,11 +35,4 @@ async function getMatchData() {
 
     await browser.close();
     return teams;
-}
-
-getMatchData()
-    .then((teams) => {
-        if (teams) {
-            console.log(teams);
-        }
-    });
+}*/

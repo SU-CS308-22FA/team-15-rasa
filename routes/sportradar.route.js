@@ -1,5 +1,5 @@
 const express = require("express");
-const SportRadarScraper = require("../WebScraping/sportRadarScraper.js");
+const SportRadarScraper = require("../webscraping/sportradar.scraper.js");
 
 const sportRadarRouter = express.Router()
 
