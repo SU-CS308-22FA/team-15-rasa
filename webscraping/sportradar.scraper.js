@@ -1,4 +1,4 @@
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 
 const url = 'https://widgets.sir.sportradar.com/live-match-tracker';
@@ -9,14 +9,14 @@ module.exports = class SportRadarScraper {
             const browser = await puppeteer.launch({
                     args: chromium.args,
                     executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-                    headless: false
+                    headless: true,
+                    ignoreHTTPSErrors: true,
                 });
             const page = await browser.newPage();
             await page.goto(url);
-
             const menuSelector = '.d-hamburger__navbar-toggle';
             await page.waitForSelector(menuSelector);
-            await page.click(menuSelector, {delay: 1000});
+            await page.click(menuSelector, {delay: 2000});
 
             const countrySelector = '.sr-ml-list__realcategory-wrapper';
             const allCountries =  await page.$$(countrySelector);
@@ -30,7 +30,7 @@ module.exports = class SportRadarScraper {
                     break;
                 }
             }
-            await turkeyExpand.click({delay: 1000});
+            await turkeyExpand.click({delay: 3000});
 
             const leagueSelector = '.sr-ml-list__collapse-item .sr-ml-list__collapse-item-active';
             const allLeagues = await page.$$(leagueSelector);
