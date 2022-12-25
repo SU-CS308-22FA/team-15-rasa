@@ -1,11 +1,16 @@
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 
 const url = 'https://widgets.sir.sportradar.com/live-match-tracker';
 
 module.exports = class SportRadarScraper {
     static async getMatchData(req, res, next) {
         try {
-            const browser = await puppeteer.launch({headless: true});
+            const browser = await puppeteer.launch({
+                    args: chromium.args,
+                    executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
+                    headless: false
+                });
             const page = await browser.newPage();
             await page.goto(url);
 
