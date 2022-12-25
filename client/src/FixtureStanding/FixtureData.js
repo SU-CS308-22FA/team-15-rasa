@@ -1,8 +1,8 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme} from "@mui/material/styles";
 import "../CSS/Site.css";
-import { FixturesTable } from "../Components/FixturesTable";
+import {FixturesTable} from "../Components/FixturesTable";
 
 const theme = createTheme();
 

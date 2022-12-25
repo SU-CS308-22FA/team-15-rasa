@@ -1,5 +1,5 @@
 // Page for visualizing referee assignments made by the algorithm
-import React, { useState } from "react";
+import React, {useState} from "react";
 import UserMenu from "../../UserMenu/UserMenu";
 import {useLocation, useNavigate} from "react-router-dom";
 import {AppBar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar} from "@mui/material";

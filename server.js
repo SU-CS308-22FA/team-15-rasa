@@ -3,6 +3,8 @@ const mongodb = require("mongodb");
 const cors = require("cors");
 const dbRouter = require("./routes/db.route.js");
 const genericDAO = require("./dao/genericDAO.js");
+const sportRadarRouter = require("./routes/sportRadar.route.js");
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -25,6 +27,7 @@ MongoClient.connect(uri)
     app.use(cors());
     app.use(express.json());
     app.use("/api/v1", dbRouter);
+    app.use("/api/sportRadar", sportRadarRouter);
     if (process.env.NODE_ENV === "production") {
       app.use(express.static("client/build"));
     }
