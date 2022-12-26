@@ -7,10 +7,8 @@ module.exports = class SportRadarScraper {
     static async getMatchData(req, res, next) {
         try {
             const browser = await puppeteer.launch({
-                    args: chromium.args,
                     executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
                     headless: true,
-                    ignoreHTTPSErrors: true,
                 });
             const page = await browser.newPage();
             await page.goto(url);
@@ -44,7 +42,10 @@ module.exports = class SportRadarScraper {
                     break;
                 }
             }
-
+            if (!superLeagueMatches) {
+                res.json([]);
+                return;
+            }
             const matches = await superLeagueMatches.$$eval('.sr-match__wrapper', matches => matches.map(match => {
                 const matchID = match.getAttribute('data-sr-match-id');
                 const homeTeam = match.querySelector('.srm-left').textContent;
