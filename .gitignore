@@ -221,3 +221,6 @@ fabric.properties
 
 # Local Netlify folder
 .netlify
+
+# Puppeteer cache files
+.cache
