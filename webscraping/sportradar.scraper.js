@@ -7,16 +7,17 @@ module.exports = class SportRadarScraper {
     static async getMatchData(req, res, next) {
         try {
             const browser = await puppeteer.launch({
-                    executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-                    headless: true,
-                });
+                args: process.env.CHROME_EXECUTABLE_PATH ? [] : chromium.args,
+                executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
+                headless: false,
+                ignoreHTTPSErrors: true,
+                defaultViewport: chromium.defaultViewport,
+            });
+
             const page = await browser.newPage();
             await page.goto(url);
-            const menuSelector = '.d-hamburger__navbar-toggle';
-            await page.waitForSelector(menuSelector);
-            await page.click(menuSelector, {delay: 2000});
-
             const countrySelector = '.sr-ml-list__realcategory-wrapper';
+            await page.waitForSelector(countrySelector);
             const allCountries =  await page.$$(countrySelector);
 
             let turkeyExpand;
@@ -28,9 +29,10 @@ module.exports = class SportRadarScraper {
                     break;
                 }
             }
-            await turkeyExpand.click({delay: 3000});
+            await turkeyExpand.click({delay: 1000});
 
             const leagueSelector = '.sr-ml-list__collapse-item .sr-ml-list__collapse-item-active';
+            await page.waitForSelector(leagueSelector);
             const allLeagues = await page.$$(leagueSelector);
 
             let superLeagueMatches;
@@ -43,6 +45,7 @@ module.exports = class SportRadarScraper {
                 }
             }
             if (!superLeagueMatches) {
+                await browser.close();
                 res.json([]);
                 return;
             }
