@@ -1,5 +1,4 @@
-const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 const url = 'https://widgets.sir.sportradar.com/live-match-tracker';
 
@@ -7,15 +6,16 @@ module.exports = class SportRadarScraper {
     static async getMatchData(req, res, next) {
         try {
             const browser = await puppeteer.launch({
-                args: process.env.CHROME_EXECUTABLE_PATH ? [] : chromium.args,
-                executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
-                headless: false,
+                headless: true,
                 ignoreHTTPSErrors: true,
-                defaultViewport: chromium.defaultViewport,
             });
 
             const page = await browser.newPage();
             await page.goto(url);
+            const menuSelector = '.d-hamburger__navbar-toggle';
+            await page.waitForSelector(menuSelector);
+            await page.click(menuSelector);
+
             const countrySelector = '.sr-ml-list__realcategory-wrapper';
             await page.waitForSelector(countrySelector);
             const allCountries =  await page.$$(countrySelector);
