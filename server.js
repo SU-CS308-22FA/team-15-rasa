@@ -4,6 +4,7 @@ const cors = require("cors");
 const dbRouter = require("./routes/db.route.js");
 const genericDAO = require("./dao/genericDAO.js");
 const sportRadarRouter = require("./routes/sportradar.route.js");
+const mackolikRouter = require("./routes/mackolik.route.js");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -28,6 +29,7 @@ MongoClient.connect(uri)
     app.use(express.json());
     app.use("/api/v1", dbRouter);
     app.use("/api/sportRadar", sportRadarRouter);
+    app.use("/api/mackolik", mackolikRouter);
     if (process.env.NODE_ENV === "production") {
       app.use(express.static("client/build"));
     }
