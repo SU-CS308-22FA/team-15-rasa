@@ -1,5 +1,5 @@
 // A page where users can comment on a particular referee assignment
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
 import Paper from "@mui/material/Paper";
@@ -18,22 +18,25 @@ export default function RefereeAssignmentComments() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    axios.get("/api/v1/", {
+    useEffect(() => {
+        axios.get("/api/v1/", {
             params: {
                 _collection: "ref_assignments",
                 _id: location.state.match_id
             }
         })
-        .catch((err) => {
-            console.log(err);
-        })
-        .then((res) => {
-            if (res && res.status === 200 && res.data.items.length > 0) {
-                setComments(res.data.items[0].comments.sort((a, b) => {
-                    return new Date(b.date) - new Date(a.date);
-                }));
-            }
-        });
+            .catch((err) => {
+                console.log(err);
+            })
+            .then((res) => {
+                if (res && res.status === 200 && res.data.items.length > 0) {
+                    setComments(res.data.items[0].comments.sort((a, b) => {
+                        return new Date(b.date) - new Date(a.date);
+                    }));
+                }
+            });
+    }, []);
+
 
     const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
 
