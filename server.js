@@ -5,6 +5,7 @@ const dbRouter = require("./routes/db.route.js");
 const genericDAO = require("./dao/genericDAO.js");
 const sportRadarRouter = require("./routes/sportradar.route.js");
 const mackolikRouter = require("./routes/mackolik.route.js");
+const transferMarktRouter = require("./routes/transfermarkt.route.js");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -30,6 +31,7 @@ MongoClient.connect(uri)
     app.use("/api/v1", dbRouter);
     app.use("/api/sportRadar", sportRadarRouter);
     app.use("/api/mackolik", mackolikRouter);
+    app.use("/api/transferMarkt", transferMarktRouter);
     if (process.env.NODE_ENV === "production") {
       app.use(express.static("client/build"));
     }

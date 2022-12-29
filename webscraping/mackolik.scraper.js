@@ -1,5 +1,3 @@
-const cheerio = require('cheerio');
-const axios = require('axios');
 const puppeteer = require('puppeteer');
 
 const main_url = 'https://www.mackolik.com/canli-sonuclar';
