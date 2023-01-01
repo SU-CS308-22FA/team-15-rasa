@@ -7,7 +7,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {CircularProgress, ListItemButton} from "@mui/material";
 
-export default function MatchViewMenu() {
+export default function AfterMatchVotingMenu() {
     const navigate = useNavigate();
     const location = useLocation();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,7 +20,7 @@ export default function MatchViewMenu() {
         axios.get("/api/v1/",
             {
                 params: {
-                    _collection: "live_matches",
+                    _collection: "fixture",
                 }
             })
             .catch((err) => {
@@ -28,17 +28,20 @@ export default function MatchViewMenu() {
             })
             .then((res) => {
                 if (res && res.status === 200) {
-                    setMatches(res.data);
+                    setMatches(res.data.items);
                     setMatchLoaded(true);
                 }
             });
+        return () => {
+            setAnchorEl(null);
+        }
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleChoice = (event) => {
-        setAnchorEl(event.currentTarget);
-        navigate("/matchview", { state: {...location.state, matchID: event.currentTarget.value} });
+    const handleChoice = (id) => {
+        setAnchorEl(null);
+        navigate("/aftermatchvoting", { state: {...location.state, matchID: id} });
     };
 
     return (
@@ -50,7 +53,7 @@ export default function MatchViewMenu() {
                 sx={{ mt: 3, mb: 2 }}
                 onClick={handleClick}
             >
-                Live Match
+                After Match Voting
             </Button>
             {
                 !matchLoaded ?
@@ -79,10 +82,15 @@ export default function MatchViewMenu() {
                     >
                         {
                             matches.length > 0 ?
-                                matches.map((match) => (
-                                    <MenuItem value={match.matchID}
-                                              onClick={handleChoice}>{match.homeTeam} vs {match.awayTeam}</MenuItem>
-                                ))
+                                matches.map((match) =>
+                                    {
+                                        return (
+                                            match.matchStatus === "MS" ?
+                                            <MenuItem key={match._id} value={match._id} onClick={() => handleChoice(match._id)}>{match.homeTeam} vs {match.awayTeam}</MenuItem>
+                                            :
+                                            null
+                                        );
+                                    })
                                 :
                                 <MenuItem>No matches were found</MenuItem>
                         }

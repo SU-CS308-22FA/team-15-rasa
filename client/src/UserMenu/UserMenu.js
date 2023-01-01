@@ -21,6 +21,7 @@ export default function UserMenu({stateChanger}) {
   };
   const handleLogout = () => {
     location.state = null;
+    window.localStorage.clear();
     setAnchorEl(null);
     navigate("/", { state: location.state });
   };

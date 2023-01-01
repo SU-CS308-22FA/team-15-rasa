@@ -5,6 +5,17 @@ const url = 'https://widgets.sir.sportradar.com/live-match-tracker';
 module.exports = class SportRadarScraper {
     static async getMatchData(req, res, next) {
         try {
+            let countryNameDesired = "Turkiye";
+            let leagueNameDesired = "Super Lig";
+            if (req.query) {
+                const {...params} = req.query;
+                if (params.country) {
+                    countryNameDesired = params.country;
+                }
+                if (params.league) {
+                    leagueNameDesired = params.league;
+                }
+            }
             const browser = await puppeteer.launch({
                 headless: true,
                 ignoreHTTPSErrors: true,
@@ -24,12 +35,17 @@ module.exports = class SportRadarScraper {
             for (let i = 0; i < allCountries.length; i++) {
                 const country = allCountries[i];
                 const countryName = await country.$eval('.sr-ml-list__realcategory-name', el => el.textContent);
-                if (countryName === 'Turkiye') {
+                if (countryName === countryNameDesired) {
                     turkeyExpand = await country.$('.sr-ml-list__collapse-header');
                     break;
                 }
             }
-            await turkeyExpand.click({delay: 1000});
+            if (!turkeyExpand) {
+                await browser.close();
+                res.json([]);
+                return;
+            }
+            await turkeyExpand.click();
 
             const leagueSelector = '.sr-ml-list__collapse-item .sr-ml-list__collapse-item-active';
             await page.waitForSelector(leagueSelector);
@@ -39,7 +55,7 @@ module.exports = class SportRadarScraper {
             for (let i = 0; i < allLeagues.length; i++) {
                 const league = allLeagues[i];
                 const leagueName = await league.$eval('.sr-ml-list__tournament-name', el => el.textContent);
-                if (leagueName === 'Super Lig') {
+                if (leagueName === leagueNameDesired) {
                     superLeagueMatches = await league.$('.sr-ml-list__matches');
                     break;
                 }
@@ -53,8 +69,12 @@ module.exports = class SportRadarScraper {
                 const matchID = match.getAttribute('data-sr-match-id');
                 const homeTeam = match.querySelector('.srm-left').textContent;
                 const awayTeam = match.querySelector('.srm-right').textContent;
-
-                return { matchID: matchID, homeTeam: homeTeam, awayTeam: awayTeam};
+                const status = match.querySelector('.sr-match-default__status-str.srm-1.srm-is-uppercase');
+                let matchEnded = false;
+                if (status && status.textContent === 'End') {
+                    matchEnded = true;
+                }
+                return { matchID: matchID, homeTeam: homeTeam, awayTeam: awayTeam, matchEnded: matchEnded };
             }));
             await browser.close();
 
