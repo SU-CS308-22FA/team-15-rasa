@@ -278,7 +278,7 @@ export default function RefereeAssignmentComments() {
                                         </Button>
                                     </p>
                                     <p style={{ textAlign: "left" }}>
-                                        likes: {comment.dislikes.length}
+                                        dislikes: {comment.dislikes.length}
                                         <Button variant="contained" onClick={()=>handleDislike(comment)}>
                                             Dislike
                                         </Button>
