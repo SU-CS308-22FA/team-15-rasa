@@ -19,12 +19,12 @@ export default function RefereeAssignmentComments() {
     const location = useLocation();
 
     const handleLike = (comment) => {
-        const index = comments.indexOf(comment);
-        if (index > -1) { // only splice array when item is found
-            comments.splice(index, 1); // 2nd parameter means remove one item only
-        }
-        if (comment.likes.indexOf(location.state._id) === -1) {
-            comment.likes.push(location.state._id);
+        if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) === -1) { //0 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.likes.push(location.state._id); //add like
             axios.put("/api/v1/", {
                 _collection: "ref_assignments",
                 _id: location.state.match_id,
@@ -44,6 +44,153 @@ export default function RefereeAssignmentComments() {
                 .catch((err) => {
                     console.log(err);
                 })
+        }
+        else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.likes.push(location.state._id); //add like
+            const index2 = comment.dislikes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.dislikes.splice(index2, 1); //remove dislike
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                }) 
+        }
+        else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            const index2 = comment.likes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.likes.splice(index2, 1); //remove like
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                }) 
+        }
+    };
+
+    const handleDislike = (comment) => {
+        if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) === -1) { //0 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.dislikes.push(location.state._id); //add dislike
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            const index2 = comment.dislikes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.dislikes.splice(index2, 1); //remove dislike
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                }) 
+        }
+        else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.dislikes.push(location.state._id); //add dislike
+            const index2 = comment.likes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.likes.splice(index2, 1); //remove like
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                }) 
         }
     };
 
@@ -128,6 +275,12 @@ export default function RefereeAssignmentComments() {
                                         likes: {comment.likes.length}
                                         <Button variant="contained" onClick={()=>handleLike(comment)}>
                                             Like
+                                        </Button>
+                                    </p>
+                                    <p style={{ textAlign: "left" }}>
+                                        likes: {comment.dislikes.length}
+                                        <Button variant="contained" onClick={()=>handleDislike(comment)}>
+                                            Dislike
                                         </Button>
                                     </p>
                                 </Grid>
