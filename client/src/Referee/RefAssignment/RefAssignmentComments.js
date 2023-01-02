@@ -34,6 +34,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -51,6 +52,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -78,6 +80,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -95,6 +98,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -121,6 +125,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -138,6 +143,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -164,6 +170,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -181,6 +188,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -207,6 +215,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -224,6 +233,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -251,6 +261,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -268,6 +279,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -294,6 +306,7 @@ export default function RefereeAssignmentComments() {
                 comments: [
                     {
                         username: comment.username,
+                        match_id: comment.match_id,
                         date: comment.date,
                         comment: comment.comment,
                         email: comment.email,
@@ -311,6 +324,7 @@ export default function RefereeAssignmentComments() {
                     setComments([
                         {
                             username: comment.username,
+                            match_id: comment.match_id,
                             date: comment.date,
                             comment: comment.comment,
                             email: comment.email,
@@ -338,7 +352,7 @@ export default function RefereeAssignmentComments() {
             })
             .then((res) => {
                 if (res && res.status === 200 && res.data.items.length > 0) {
-                    setComments(res.data.items[0].comments);
+                    setComments(res.data.items[0].comments ? res.data.items[0].comments : comments);
                 }
             });
     }, []);

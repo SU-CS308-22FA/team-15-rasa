@@ -8,13 +8,14 @@ import Moment from "moment";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ReactMarkdown from "react-markdown";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import ReportIcon from '@mui/icons-material/Report';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 export default function SeeReports() {
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
     let [comments, setComments] = useState([]);
+    let [allComments, setAllComments] = useState([]);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -35,6 +36,7 @@ export default function SeeReports() {
                     console.log(assignments);
                     for(let i=0;i<assignments.length;i++){
                         for(let j=0;j<assignments[i].comments.length;j++){
+                            allComments = allComments.concat(assignments[i].comments[j]);
                             if(assignments[i].comments[j].reports.length>0){
                                 comments = comments.concat(assignments[i].comments[j]);
                             }
@@ -42,9 +44,41 @@ export default function SeeReports() {
                     }
                     console.log(comments);
                     setComments(comments);
+                    setAllComments(allComments);
                 }
             });
     }, []);
+
+    const handleDelete = (comment) => {
+        const index = comments.indexOf(comment);
+        if (index > -1) {
+            comments.splice(index, 1); //remove comment
+        }
+        const index2 = allComments.indexOf(comment);
+        if (index2 > -1) {
+            allComments.splice(index2, 1); //remove comment again
+        }
+        const temp = [];
+        for(let i=0;i<allComments.length;i++){
+            if(allComments[i].match_id === comment.match_id){
+                temp.push(allComments[i]);
+            }
+        }
+        axios.put("/api/v1/", {
+            _collection: "ref_assignments",
+            _id: comment.match_id,
+            comments: temp
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+            .then(() => {
+                console.log(comments);
+                setComments(comments);
+                setAllComments(allComments);
+                forceUpdate();
+            });
+    }
 
     return (
         <div>
@@ -78,6 +112,9 @@ export default function SeeReports() {
                                     <p>
                                         Reports: {comment.reports.length}
                                     </p>
+                                    <Button variant="contained" startIcon={<ClearIcon />} onClick={() => handleDelete(comment)}>
+                                        Delete Comment
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Paper>
