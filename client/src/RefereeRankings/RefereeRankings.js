@@ -1,11 +1,9 @@
 import {Matches_1, Matches_2, Matches_3} from "./RefereeRankingData.js";
-import {Fixtures} from "../Components/FMOCK_DATA.json"
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {AppBar, TableSortLabel, Toolbar} from "@mui/material";
-import Button from "@mui/material/Button";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,7 +15,7 @@ import Avatar from '@mui/material/Avatar';
 import '../RefereeListDetails/RefereeList.css';
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
-//import UserMenu from "../../UserMenu/UserMenu";
+import UserMenu from "../UserMenu/UserMenu";
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
@@ -58,9 +56,21 @@ const RefereeRankings = () =>{
               </Typography>
             </Toolbar>
           </AppBar>
+          
           <br></br>
-          <div className="rankings-container">
+          <div className="content_container">          
             <div className="select-container">
+              <Box
+                sx={{
+                my: 3,
+                mx: 3,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                }}
+                >
+                  <UserMenu/>
+              </Box> 
             <h1>{selects}</h1>
               <select value={selects} onChange={e=>setSelects(e.target.value)}
               >

@@ -2,12 +2,9 @@ import * as React from "react";
 import Content from "../Components/Content";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import {createTheme} from "@mui/material/styles";
 import {AppBar, Toolbar} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import "../CSS/Site.css";
-
-const theme = createTheme();
 
 function StandFix() {
   return (
