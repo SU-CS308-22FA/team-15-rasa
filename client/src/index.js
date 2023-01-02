@@ -44,7 +44,7 @@ import MatchView from "./LiveMatch/MatchView";
 import AfterMatchVoting from "./Referee/AfterMatchVoting/AfterMatchVoting";
 import AddNews from "./NewsPage/AddNews";
 import News from "./NewsPage/News";
-
+import AssignReferees from "./AdminPanel/AssignReferees";
 export const light = {
   palette: {
     mode: "light",
@@ -115,7 +115,7 @@ export default function App() {
             <Route path="aftermatchvoting" element={<AfterMatchVoting/>} />
             <Route path="addnews" element={<AddNews/>} />
             <Route path="news" element={<News/>} />
-            
+            <Route path="refassignmentadmin" element={<AssignReferees />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
