@@ -45,9 +45,6 @@ const FixCOLUMNS = [
 
 export const FixturesTable = () => {
     const [fixtures, setFixtures] = useState([]);  
-
-    
-
     useEffect(() => {
         axios.get("/api/v1/", {
             params: {

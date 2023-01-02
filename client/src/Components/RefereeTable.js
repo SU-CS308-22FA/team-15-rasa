@@ -10,11 +10,21 @@ const GROUPED_COLUMNS= [
     {
         Header: 'Referee',
         columns: [
+            {               
+                accessor: 'image',                
+                Cell: props => (
+                    <div className='img_size'>
+                        <img
+                            src={props.row.original.image}                           
+                            alt='Referee'
+                        />            
+                    </div>
+                    )
+            },
             {
                 Header: 'Name',
                 accessor:'name'
             },
-
             {
                 Header: 'Age at First Match',
                 accessor:'ageAtFirstMatch'
@@ -51,7 +61,12 @@ const GROUPED_COLUMNS= [
             {
                 Header: 'Average Penalty',
                 accessor:'averagePenalty'
+            },
+            {
+                Header: 'Performance Score',
+                accessor:'score'
             }
+            
         ]
     }
 ]

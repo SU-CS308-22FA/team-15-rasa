@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./RefereeList.css";
 import {Referees} from "./RefereeListData.js";
 import CssBaseline from "@mui/material/CssBaseline";
