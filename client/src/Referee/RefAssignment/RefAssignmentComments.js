@@ -11,6 +11,8 @@ import UserMenu from "../../UserMenu/UserMenu";
 import Button from "@mui/material/Button";
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import ReactMarkdown from "react-markdown";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 export default function RefereeAssignmentComments() {
@@ -44,6 +46,20 @@ export default function RefereeAssignmentComments() {
                 .catch((err) => {
                     console.log(err);
                 })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
         else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
             const index = comments.indexOf(comment);
@@ -73,7 +89,21 @@ export default function RefereeAssignmentComments() {
             })
                 .catch((err) => {
                     console.log(err);
-                }) 
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
         else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
             const index = comments.indexOf(comment);
@@ -102,7 +132,21 @@ export default function RefereeAssignmentComments() {
             })
                 .catch((err) => {
                     console.log(err);
-                }) 
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
     };
 
@@ -132,6 +176,20 @@ export default function RefereeAssignmentComments() {
                 .catch((err) => {
                     console.log(err);
                 })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
         else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
             const index = comments.indexOf(comment);
@@ -160,7 +218,21 @@ export default function RefereeAssignmentComments() {
             })
                 .catch((err) => {
                     console.log(err);
-                }) 
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
         else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
             const index = comments.indexOf(comment);
@@ -190,7 +262,21 @@ export default function RefereeAssignmentComments() {
             })
                 .catch((err) => {
                     console.log(err);
-                }) 
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
         }
     };
 
@@ -208,9 +294,7 @@ export default function RefereeAssignmentComments() {
             })
             .then((res) => {
                 if (res && res.status === 200 && res.data.items.length > 0) {
-                    setComments(res.data.items[0].comments.sort((a, b) => {
-                        return new Date(b.date) - new Date(a.date);
-                    }));
+                    setComments(res.data.items[0].comments);
                 }
             });
     }, []);
@@ -254,7 +338,9 @@ export default function RefereeAssignmentComments() {
                 </Grid>
             </Grid>
             <Grid container spacing={2}>
-                {comments.map((comment) => (
+                {comments.sort((a, b) => {
+                    return new Date(b.date) - new Date(a.date);
+                }).map((comment) => (
                     <Grid item xs={12}>
                         <Paper elevation={3} style={{ padding: 14 }}>
                             <Grid container wrap="nowrap" spacing={2}>
@@ -271,18 +357,18 @@ export default function RefereeAssignmentComments() {
                                     <p style={{ textAlign: "left", color: "gray" }}>
                                         posted at {Moment(comment.date).format("MMMM Do YYYY, h:mm:ss a")}
                                     </p>
-                                    <p style={{ textAlign: "left" }}>
-                                        likes: {comment.likes.length}
-                                        <Button variant="contained" onClick={()=>handleLike(comment)}>
-                                            Like
-                                        </Button>
-                                    </p>
-                                    <p style={{ textAlign: "left" }}>
-                                        dislikes: {comment.dislikes.length}
-                                        <Button variant="contained" onClick={()=>handleDislike(comment)}>
-                                            Dislike
-                                        </Button>
-                                    </p>
+                                    <Grid container columnSpacing={{ xs: 2, md: 3 }}>
+                                        <Grid xs={0.75}>
+                                            <Button variant="contained" startIcon={<ThumbUpIcon />} onClick={() => handleLike(comment)}>
+                                                {comment.likes.length}
+                                            </Button>
+                                        </Grid>
+                                        <Grid>
+                                            <Button variant="contained" startIcon={<ThumbDownIcon />} onClick={() => handleDislike(comment)}>
+                                                {comment.dislikes.length}
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Paper>
