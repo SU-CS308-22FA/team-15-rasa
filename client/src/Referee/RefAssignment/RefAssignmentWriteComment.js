@@ -46,7 +46,10 @@ export default function RefereeAssignmentWriteComment() {
                     username: location.state.username,
                     date: new Date(),
                     comment: comment,
-                    email: location.state.email
+                    email: location.state.email,
+                    likes: [],
+                    reports: [],
+                    dislikes: []
                 },
                 ...location.state.comments
             ]

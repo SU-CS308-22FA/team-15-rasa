@@ -18,6 +18,37 @@ export default function RefereeAssignmentComments() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const handleLike = (comment) => {
+        const index = comments.indexOf(comment);
+        if (index > -1) { // only splice array when item is found
+            comments.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        if (comment.likes.indexOf(location.state._id) === -1) {
+            comment.likes.push(location.state._id);
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    };
+
+    const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
+
     useEffect(() => {
         axios.get("/api/v1/", {
             params: {
@@ -36,9 +67,6 @@ export default function RefereeAssignmentComments() {
                 }
             });
     }, []);
-
-
-    const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
 
     return (
         <div>
@@ -95,6 +123,12 @@ export default function RefereeAssignmentComments() {
                                     </p>
                                     <p style={{ textAlign: "left", color: "gray" }}>
                                         posted at {Moment(comment.date).format("MMMM Do YYYY, h:mm:ss a")}
+                                    </p>
+                                    <p style={{ textAlign: "left" }}>
+                                        likes: {comment.likes.length}
+                                        <Button variant="contained" onClick={()=>handleLike(comment)}>
+                                            Like
+                                        </Button>
                                     </p>
                                 </Grid>
                             </Grid>
