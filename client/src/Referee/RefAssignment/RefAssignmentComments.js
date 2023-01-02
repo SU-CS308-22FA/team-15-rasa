@@ -334,7 +334,11 @@ export default function RefereeAssignmentComments() {
                         },
                         ...comments
                     ]);
+                    alert("The comment you reported will be inspected by admins.");
                 });
+        }
+        else{
+            alert("You have already reported this comment.");
         }
     }
 
@@ -415,6 +419,7 @@ export default function RefereeAssignmentComments() {
                                     <p style={{ textAlign: "left", color: "gray" }}>
                                         posted at {Moment(comment.date).format("MMMM Do YYYY, h:mm:ss a")}
                                     </p>
+                                    {location.state && location.state.username ? (
                                     <Grid container columnSpacing={{ xs: 2, md: 3 }}>
                                         <Grid xs={0.75}>
                                             <Button variant="contained" startIcon={<ThumbUpIcon />} onClick={() => handleLike(comment)}>
@@ -432,6 +437,9 @@ export default function RefereeAssignmentComments() {
                                             </Button>
                                         </Grid>
                                     </Grid>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </Grid>
                             </Grid>
                         </Paper>
