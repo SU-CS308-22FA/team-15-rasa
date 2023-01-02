@@ -13,6 +13,7 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import ReactMarkdown from "react-markdown";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ReportIcon from '@mui/icons-material/Report';
 
 
 export default function RefereeAssignmentComments() {
@@ -280,6 +281,49 @@ export default function RefereeAssignmentComments() {
         }
     };
 
+    const handleReport = (comment) => {
+        if (comment.reports.indexOf(location.state._id) === -1) {
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.reports.push(location.state._id); //add dislike
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+    }
+
     const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
 
     useEffect(() => {
@@ -363,9 +407,14 @@ export default function RefereeAssignmentComments() {
                                                 {comment.likes.length}
                                             </Button>
                                         </Grid>
-                                        <Grid>
+                                        <Grid xs={0.75}>
                                             <Button variant="contained" startIcon={<ThumbDownIcon />} onClick={() => handleDislike(comment)}>
                                                 {comment.dislikes.length}
+                                            </Button>
+                                        </Grid>
+                                        <Grid >
+                                            <Button variant="contained" startIcon={<ReportIcon />} onClick={() => handleReport(comment)}>
+                                                Report Comment
                                             </Button>
                                         </Grid>
                                     </Grid>

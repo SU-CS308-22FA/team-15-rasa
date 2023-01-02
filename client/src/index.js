@@ -20,6 +20,7 @@ import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import SeeComplaints from "./AdminPanel/SeeComplaints";
 import SeeFanComplaints from "./AdminPanel/SeeFanComplaints";
+import SeeReports from "./AdminPanel/SeeReports";
 import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
 import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
 
@@ -81,6 +82,7 @@ export default function App() {
             <Route path="adminlogin" element={<AdminLogin />} />
             <Route path="adminpanel" element={<AdminPanel />} />
             <Route path="seecomplaints" element={<SeeComplaints />} />
+            <Route path="seereports" element={<SeeReports />} />
             <Route path="seefancomplaints" element={<SeeFanComplaints />} />
             <Route path="createteamaccount" element={<CreateTeamAccount />} />
             <Route
