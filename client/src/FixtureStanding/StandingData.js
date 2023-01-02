@@ -1,10 +1,7 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import {createTheme} from "@mui/material/styles";
 import "../CSS/Site.css";
 import {StandingTable} from "../Components/StandingTable";
-
-const theme = createTheme();
 
 function StandingData() {
   return (
@@ -15,7 +12,7 @@ function StandingData() {
       </Typography>
       <div className="RefData">
         <table>
-          <StandingTable />
+          <StandingTable/>
         </table>
         <br></br>
         <br></br>

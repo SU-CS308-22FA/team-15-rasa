@@ -2,14 +2,11 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {createTheme} from "@mui/material/styles";
 import {AppBar, Toolbar} from "@mui/material";
 import "../CSS/Site.css";
-import {RefereeTable} from "../Components/RefereeTable";
+import RefereeTable from "../Components/RefereeTable";
 import Box from "@mui/material/Box";
 import UserMenu from "../UserMenu/UserMenu";
-
-const theme = createTheme();
 
 function RefereeData() {
   return (

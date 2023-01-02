@@ -1,30 +1,33 @@
 import React, {useMemo} from 'react';
 import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
-import RMOCK_DATA from './RMOCK_DATA.json';
 import '../CSS/Site.css';
 import Button from "@mui/material/Button";
 import {GlobalFilter} from './GlobalFilter';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const GROUPED_COLUMNS= [
-    {
-        Header: 'Id',
-        accessor:'id'
-
-    },
+const GROUPED_COLUMNS= [    
     {
         Header: 'Referee',
         columns: [
-            {
-                Header: 'First Name',
-                accessor:'first_name'
+            {               
+                accessor: 'image',                
+                Cell: props => (
+                    <div className='img_size'>
+                        <img
+                            src={props.row.original.image}                           
+                            alt='Referee'
+                        />            
+                    </div>
+                    )
             },
             {
-                Header: 'Last Name',
-                accessor:'last_name'
+                Header: 'Name',
+                accessor:'name'
             },
             {
-                Header: 'Age',
-                accessor:'age'
+                Header: 'Age at First Match',
+                accessor:'ageAtFirstMatch'
             },
         ]
     },
@@ -32,27 +35,62 @@ const GROUPED_COLUMNS= [
         Header:'Match Statistics',
         columns : [
             {
-                Header: 'Number of Yellow Card',
-                accessor:'Number of Yellow Card'
+                Header: 'Total Matches',
+                accessor:'totalMatches'
             },
             {
-                Header: 'Number of Red Card',
-                accessor:'Number of Red Card'
+                Header: 'Total Yellow Card',
+                accessor:'totalYellow'
             },
             {
-                Header: 'Penalty',
-                accessor:'Penalty'
+                Header: 'Average Yellow',
+                accessor:'averageYellow'
+            },            
+            {
+                Header: 'Total Red Card',
+                accessor:'totalRed'
             },
+            {
+                Header: 'Average Red',
+                accessor:'averageRed'
+            },
+            {
+                Header: 'Total Penalty',
+                accessor:'totalPenalty'
+            },
+            {
+                Header: 'Average Penalty',
+                accessor:'averagePenalty'
+            },
+            {
+                Header: 'Performance Score',
+                accessor:'score'
+            }
+            
         ]
     }
 ]
-export const RefereeTable = () =>{
+export default function RefereeTable() {
+    const [referees, setReferees] = useState([]);  
+    useEffect(() => {
+        axios.get("/api/v1/", {
+            params: {
+                _collection: "ref_stats",
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((res) => {
+            if (res && res.status === 200 && res.data.items.length > 0) {                
+                setReferees(res.data.items);
+            }
+        });
+    }, []);
     const columns = useMemo(()=> GROUPED_COLUMNS, [])
-    const data = useMemo(()=> RMOCK_DATA, [])
-
     const tableInstance = useTable({
         columns: columns,
-        data: data
+        data: referees
     }, useGlobalFilter,
     useSortBy, usePagination)
     const {getTableProps, getTableBodyProps, headerGroups, page, nextPage, canNextPage, canPreviousPage, previousPage, prepareRow, state, setGlobalFilter} = tableInstance

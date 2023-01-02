@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./RefereeList.css";
 import {Referees} from "./RefereeListData.js";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +14,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import UserMenu from "../UserMenu/UserMenu";
+import Box from "@mui/material/Box";
 
 const theme = createTheme();
 function RefereeListDetails() {
@@ -36,13 +38,24 @@ function RefereeListDetails() {
             </Toolbar>
           </AppBar>
             <div>
+                <Box
+                    sx={{
+                    my: 3,
+                    mx: 3,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    }}
+                    >
+                    <UserMenu/>
+                </Box> 
               <Typography component="h1" variant="h5" className="ref-container">
                 <br></br>
                 Season 2022/2023 Super Lig Referees
                 <br></br>
               </Typography>
                 <div className="app_container">
-                    <div className="content_container">
+                    <div className="content_container">                    
                         {Referees.map((referee)=>{
                             return (
                                 <Card sx={{ maxWidth: 345 }}>
