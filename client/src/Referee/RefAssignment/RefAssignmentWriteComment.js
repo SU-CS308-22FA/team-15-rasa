@@ -44,9 +44,13 @@ export default function RefereeAssignmentWriteComment() {
             comments: [
                 {
                     username: location.state.username,
+                    match_id: location.state.match_id,
                     date: new Date(),
                     comment: comment,
-                    email: location.state.email
+                    email: location.state.email,
+                    likes: [],
+                    reports: [],
+                    dislikes: []
                 },
                 ...location.state.comments
             ]
