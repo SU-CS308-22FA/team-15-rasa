@@ -3,7 +3,10 @@ import PieChart, {Connector, Export, Label, Series, Size,} from "devextreme-reac
 import axios from "axios";
 import groupBy from "lodash.groupby";
 import Box from "@mui/material/Box";
-
+import Typography from '@mui/material/Typography';
+import { AppBar, Toolbar } from "@mui/material";
+import '../CSS/Site.css';
+import "../RefereeListDetails/RefereeList.css";
 class SurveyVisualsClass extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -51,42 +54,20 @@ class SurveyVisualsClass extends React.PureComponent {
   render() {
     return (
       <div>
-        <PieChart
-          id="pie"
-          dataSource={this.state.data}
-          palette="Bright"
-          title="On a scale of zero to ten, how would you rate the referee's performance in your team's game?"
-        >
-          <Series argumentField="key" valueField="count">
-            <Label visible={true}>
-              <Connector visible={true} width={1} />
-            </Label>
-          </Series>
-
-          <Size width={500} />
-          <Export enabled={true} />
-        </PieChart>
-        <PieChart
-          id="pie2"
-          dataSource={this.state.data2}
-          palette="Bright"
-          title="On a scale of zero to ten, how would you rate the referee's foul calls in your team's game?"
-        >
-          <Series argumentField="key" valueField="count">
-            <Label visible={true}>
-              <Connector visible={true} width={1} />
-            </Label>
-          </Series>
-
-          <Size width={500} />
-          <Export enabled={true} />
-        </PieChart>
-        <div>
+      <AppBar position="relative">
+        <Toolbar>
+          <Typography component="h1" variant="h5">
+            Referee Survey
+          </Typography>
+        </Toolbar>
+      </AppBar>        
+      <div className="app_container">
+        <div className="content_container">
           <PieChart
-            id="pie3"
-            dataSource={this.state.data3}
+            id="pie"
+            dataSource={this.state.data}
             palette="Bright"
-            title="On a scale of zero to ten, how would you rate the referee's booking calls in your team's game?"
+            title="On a scale of minus five to five, how should total matches affect referee's performance score?"
           >
             <Series argumentField="key" valueField="count">
               <Label visible={true}>
@@ -97,52 +78,70 @@ class SurveyVisualsClass extends React.PureComponent {
             <Size width={500} />
             <Export enabled={true} />
           </PieChart>
+          <PieChart
+            id="pie2"
+            dataSource={this.state.data2}
+            palette="Bright"
+            title="On a scale of minus five to five, how should average yellow card rate affect referee's performance score?"
+          >
+            <Series argumentField="key" valueField="count">
+              <Label visible={true}>
+                <Connector visible={true} width={1} />
+              </Label>
+            </Series>
+
+            <Size width={500} />
+            <Export enabled={true} />
+          </PieChart>
+          <div>
+            <PieChart
+              id="pie3"
+              dataSource={this.state.data3}
+              palette="Bright"
+              title="On a scale of minus five to five, how should average red card rate affect referee's performance score?"
+            >
+              <Series argumentField="key" valueField="count">
+                <Label visible={true}>
+                  <Connector visible={true} width={1} />
+                </Label>
+              </Series>
+
+              <Size width={500} />
+              <Export enabled={true} />
+            </PieChart>
+          </div>
+          <PieChart
+            id="pie4"
+            dataSource={this.state.data4}
+            palette="Bright"
+            title="On a scale of minus five to five, how should average yellow-red card rate affect referee's performance score?"
+          >
+            <Series argumentField="key" valueField="count">
+              <Label visible={true}>
+                <Connector visible={true} width={1} />
+              </Label>
+            </Series>
+
+            <Size width={500} />
+            <Export enabled={true} />
+          </PieChart>
+          <PieChart
+            id="pie5"
+            dataSource={this.state.data5}
+            palette="Bright"
+            title="On a scale of minus five to five, how should average penalty rate affect referee's performance score?"
+          >
+            <Series argumentField="key" valueField="count">
+              <Label visible={true}>
+                <Connector visible={true} width={1} />
+              </Label>
+            </Series>
+
+            <Size width={500} />
+            <Export enabled={true} />
+          </PieChart>
+          </div>
         </div>
-        <PieChart
-          id="pie4"
-          dataSource={this.state.data4}
-          palette="Bright"
-          title="On a scale of zero to ten, how would you rate the referee's effort in maintaining the tempo of the game?"
-        >
-          <Series argumentField="key" valueField="count">
-            <Label visible={true}>
-              <Connector visible={true} width={1} />
-            </Label>
-          </Series>
-
-          <Size width={500} />
-          <Export enabled={true} />
-        </PieChart>
-        <PieChart
-          id="pie5"
-          dataSource={this.state.data5}
-          palette="Bright"
-          title="On a scale of zero to ten, how would you rate the consistency of the referee's decisions?"
-        >
-          <Series argumentField="key" valueField="count">
-            <Label visible={true}>
-              <Connector visible={true} width={1} />
-            </Label>
-          </Series>
-
-          <Size width={500} />
-          <Export enabled={true} />
-        </PieChart>
-        <PieChart
-          id="pie6"
-          dataSource={this.state.data6}
-          palette="Bright"
-          title="On a scale of zero to ten, how would you rate the referee assignments this week?"
-        >
-          <Series argumentField="key" valueField="count">
-            <Label visible={true}>
-              <Connector visible={true} width={1} />
-            </Label>
-          </Series>
-
-          <Size width={500} />
-          <Export enabled={true} />
-        </PieChart>
       </div>
     );
   }

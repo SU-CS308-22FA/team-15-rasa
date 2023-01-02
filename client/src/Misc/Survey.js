@@ -1,5 +1,5 @@
-import {useCallback} from "react";
-
+import {useCallback, useEffect} from "react";
+import '../CSS/Site.css';
 // Default V2 theme
 import "survey-core/defaultV2.min.css";
 // Modern theme
@@ -8,6 +8,8 @@ import {Model, StylesManager} from "survey-core";
 import {Survey} from "survey-react-ui";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
+import Typography from '@mui/material/Typography';
+import { AppBar, Toolbar } from "@mui/material";
 
 // const SURVEY_ID = 1;
 
@@ -17,70 +19,59 @@ const surveyJson = {
   elements: [
     {
       type: "rating",
-      name: "rating1",
+      name: "totalMatches",
       title:
-        "On a scale of zero to ten, how would you rate the referee's performance in your team's game?",
+        "On a scale of minus five to five, how should total matches affect referee's performance score?",
       isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
+      rateMin: -5,
+      rateMax: 5,
+      minRateDescription: "(Negative)",
+      maxRateDescription: "(Positive)",
     },
     {
       type: "rating",
-      name: "rating2",
+      name: "averageYellow",
       title:
-        "On a scale of zero to ten, how would you rate the referee's foul calls in your team's game?",
+        "On a scale of minus five to five, how should average yellow card rate affect referee's performance score?",
       isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
+      rateMin: -5,
+      rateMax: 5,
+      minRateDescription: "(Negative)",
+      maxRateDescription: "(Positive)",
     },
     {
       type: "rating",
-      name: "rating3",
+      name: "averageRed",
       title:
-        "On a scale of zero to ten, how would you rate the referee's booking calls in your team's game?",
+        "On a scale of minus five to five, how should average red card rate affect referee's performance score?",
       isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
+      rateMin: -5,
+      rateMax: 5,
+      minRateDescription: "(Negative)",
+      maxRateDescription: "(Positive)",
     },
     {
       type: "rating",
-      name: "rating4",
+      name: "averageYellowRed",
       title:
-        "On a scale of zero to ten, how would you rate the referee's effort in maintaining the tempo of the game?",
+        "On a scale of minus five to five, how should average yellow-red card rate affect referee's performance score?",
       isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
+      rateMin: -5,
+      rateMax: 5,
+      minRateDescription: "(Negative)",
+      maxRateDescription: "(Positive)",
     },
     {
       type: "rating",
-      name: "rating5",
+      name: "averagePenalty",
       title:
-        "On a scale of zero to ten, how would you rate the consistency of the referee's decisions?",
+        "On a scale of minus five to five, how should average penalty rate affect referee's performance score?",
       isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
-    },
-    {
-      type: "rating",
-      name: "rating6",
-      title:
-        "On a scale of zero to ten, how would you rate the referee assignments this week?",
-      isRequired: true,
-      rateMin: 0,
-      rateMax: 10,
-      minRateDescription: "(Terrible)",
-      maxRateDescription: "(Great)",
-    },
+      rateMin: -5,
+      rateMax: 5,
+      minRateDescription: "(Negative)",
+      maxRateDescription: "(Positive)",
+    },    
   ],
 };
 
@@ -88,12 +79,35 @@ function MySurvey() {
   const navigate = useNavigate();
   const location = useLocation();
   const survey = new Model(surveyJson);
-  const alertResults = useCallback((sender) => {
+  const alertResults = useCallback(async (sender) => {
     let temp = sender.data;
     temp["_collection"] = "survey";
-    axios.post("/api/v1", temp);
-    navigate("/", { state: location.state });
+    temp["email"] = location.state.email;
+    
+    await axios.get("/api/v1/", {
+      params: {
+          _collection: "survey",
+      }
+    })
+    .catch((err) => {
+        console.log(err);        
+    })
+    .then((res) => {
+      if (res && res.status === 200 ) {
+          const surveys = res.data.items;
+          const control = surveys.map(survey =>{
+            return (survey.email && survey.email === location.state.email);
 
+          })
+          if(control.includes(true)){
+            alert("Your response was not recorded since you have responded already.");
+          }
+          else{
+            axios.post("/api/v1", temp);            
+          }
+          navigate("/", { state: location.state });
+      }
+  });
     // saveSurveyResults(
     //   "https://your-web-service.com/" + SURVEY_ID,
     //   sender.data
@@ -102,7 +116,21 @@ function MySurvey() {
 
   survey.onComplete.add(alertResults);
 
-  return <Survey model={survey} />;
+  return (
+    <div>
+      <AppBar position="relative">
+        <Toolbar>
+          <Typography component="h1" variant="h5">
+            Referee Survey
+          </Typography>
+        </Toolbar>
+      </AppBar>
+        <div classname='app_container'>          
+          < Survey model={survey} />
+        </div>
+    </div>
+  )
+  
 }
 
 // function saveSurveyResults(url, json) {

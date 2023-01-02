@@ -43,6 +43,8 @@ import React, {useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import MatchView from "./LiveMatch/MatchView";
 import AfterMatchVoting from "./Referee/AfterMatchVoting/AfterMatchVoting";
+import AddNews from "./NewsPage/AddNews";
+import News from "./NewsPage/News";
 
 export const light = {
   palette: {
@@ -111,8 +113,11 @@ export default function App() {
             />
             <Route path="refereelistdetails" element={<RefereeListDetails/>} />
             <Route path="refereerankings" element={<RefereeRankings/>} />
-            <Route path="matchview" element={<MatchView/>} />
+            <Route path="matchview" element={<MatchView/>} />            
             <Route path="aftermatchvoting" element={<AfterMatchVoting/>} />
+            <Route path="addnews" element={<AddNews/>} />
+            <Route path="news" element={<News/>} />
+            
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
