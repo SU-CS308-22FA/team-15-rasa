@@ -1,23 +1,25 @@
 import * as React from "react";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {List, ListItemButton} from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { List, ListItemButton } from "@mui/material";
 import UserMenu from "../UserMenu/UserMenu";
 import MatchViewMenu from "./MatchViewMenu";
 import AfterMatchVotingMenu from "./AfterMatchVotingMenu";
 
 
 export default function HomePage({ stateChanger }) {
-    const navigate = useNavigate();
-    let [location, setLocation] = React.useState(useLocation());
-    const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
+  const navigate = useNavigate();
+  let [location, setLocation] = React.useState(useLocation());
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+
 
     useEffect(() => {
         if(!window.location.hash && location.state) {
@@ -184,6 +186,41 @@ export default function HomePage({ stateChanger }) {
                 Referee stats
               </Button>
             </ListItemButton>
+            {location.state &&
+            location.state.username &&
+            location.state.journalist != "true" ? (
+              <ListItemButton divider>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() => navigate("/survey", { state: location.state })}
+                >
+                  Take the survey
+                </Button>
+              </ListItemButton>
+            ) : (
+              <></>
+            )}
+            {location.state &&
+            location.state.username &&
+            location.state.journalist == "true" ? (
+              <ListItemButton divider>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() => navigate("/survey", { state: location.state })}
+                >
+                  Referee scoring for journalists
+                </Button>
+              </ListItemButton>
+            ) : (
+              <></>
+            )}
+
             {location.state && location.state.username ? (
               <ListItemButton divider>
                 <Button

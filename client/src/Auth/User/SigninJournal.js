@@ -12,7 +12,7 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export default function Signin() {
+export default function SigninJournal() {
   const location = useLocation();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -25,7 +25,7 @@ export default function Signin() {
     axios
       .get("/api/v1", {
         params: {
-          _collection: "users",
+          _collection: "journalists",
           email: data.get("email"),
         },
       })
@@ -33,26 +33,34 @@ export default function Signin() {
         console.log(err);
       })
       .then((res) => {
-        if (
-          res &&
-          (res.data.items.length === 0 ||
-            res.data.items[0].password !== data.get("password"))
-        ) {
-          alert("Invalid email or password");
-          return;
-        }
-        if (res) {
-          if (location.state && location.state.from) {
-            navigate(location.state.from, {
-              state: { ...location.state, ...res.data.items[0] },
-            });
+        if (res.data.items[0].confirmed === "false") {
+          if (
+            res &&
+            (res.data.items.length === 0 ||
+              res.data.items[0].password !== data.get("password"))
+          ) {
+            alert("Invalid email or password");
+            return;
+          }
+          if (res) {
+            if (location.state && location.state.from) {
+              navigate(location.state.from, {
+                state: { ...location.state, ...res.data.items[0] },
+              });
+            } else {
+              navigate("/", {
+                state: {
+                  ...location.state,
+                  ...res.data.items[0],
+                  journalist: "true",
+                },
+              });
+            }
           } else {
-            navigate("/", {
-              state: { ...location.state, ...res.data.items[0] },
-            });
+            alert("There was an error. Please try again.");
           }
         } else {
-          alert("There was an error. Please try again.");
+          alert("Your journalist account was not verified by our admins.");
         }
       });
   };
@@ -135,10 +143,6 @@ export default function Signin() {
               <Grid item xs></Grid>
               <Grid item>
                 <Link to="/forgotpassword">Forgot password?</Link>
-              </Grid>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link to="/signinjournal">Sign in as a journalist</Link>
               </Grid>
             </Grid>
           </Box>
