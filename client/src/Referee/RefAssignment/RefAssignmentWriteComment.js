@@ -36,8 +36,14 @@ export default function RefereeAssignmentWriteComment() {
         setOpenSuccess(false);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        await axios.get("/api/v1/", {
+            params: {
+                _collection: "ref_assignments",
+            }
+        });
+
         axios.put("/api/v1/", {
             _collection: "ref_assignments",
             _id: location.state.match_id,

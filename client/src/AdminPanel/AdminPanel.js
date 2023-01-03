@@ -280,7 +280,7 @@ export default function AdminPanel() {
     }
 
     let liveMatchData = [];
-    axios.get("/api/sportRadar/",
+    await axios.get("/api/sportRadar/",
         {
           params: {
             country: "Turkiye",

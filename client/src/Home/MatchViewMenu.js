@@ -20,7 +20,7 @@ export default function MatchViewMenu() {
         axios.get("/api/v1/",
             {
                 params: {
-                    _collection: "live_matches",
+                    _collection: "live_match",
                 }
             })
             .catch((err) => {
@@ -28,7 +28,7 @@ export default function MatchViewMenu() {
             })
             .then((res) => {
                 if (res && res.status === 200) {
-                    setMatches(res.data);
+                    setMatches(res.data.items);
                     setMatchLoaded(true);
                 }
             });

@@ -8,7 +8,6 @@ import {GlobalFilter} from "../Components/GlobalFilter";
 import {useMemo} from "react";
 import {useGlobalFilter, usePagination, useSortBy, useTable} from "react-table";
 import '../CSS/Site.css';
-import {FixturesTable} from "../Components/FixturesTable";
 
 const ASSIGNMENT_COLUMNS = [
     {
@@ -23,10 +22,6 @@ const ASSIGNMENT_COLUMNS = [
         Header: 'Referee',
         accessor: 'referee',
     },
-    {
-        Header: 'Date',
-        accessor: 'matchTime',
-    },
 ]
 
 export default function AssignReferees() {
@@ -36,7 +31,6 @@ export default function AssignReferees() {
     const [referee, setReferee] = useState("");
     const [surveyData, setSurveyData] = useState([]);
     const [assignmentData, setAssignmentData] = useState([]);
-    const [assignments, setAssignments] = useState([]);
     const columns = useMemo(() => ASSIGNMENT_COLUMNS, []);
     const tableInstance = useTable({
         columns: columns,
@@ -45,7 +39,7 @@ export default function AssignReferees() {
     const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, canNextPage, canPreviousPage, previousPage, prepareRow, state, setGlobalFilter } = tableInstance;
     const { globalFilter } = state;
 
-    useEffect(() => {
+    const getAssignments = () => {
         axios.get("api/v1",
             {
                 params: {
@@ -60,7 +54,7 @@ export default function AssignReferees() {
                     setAssignmentData(res.data.items);
                 }
             });
-    }, []);
+    };
 
     const getWeights = () => {
         let totalMatchesWeight = 0;
@@ -173,8 +167,12 @@ export default function AssignReferees() {
                 if (res && res.status === 200) {
                     let matches = res.data.items;
                     matches = matches.map((match) => {
+                        let assigned = false;
+                        if (match.assigned) {
+                            assigned = true;
+                        }
                         return (
-                            match.matchStatus !== "MS" && match.assigned ? match : null
+                            match.matchStatus !== "MS" && !assigned ? match : null
                         )
                     }).filter((match) => match !== null);
                     setMatches(matches);
@@ -189,90 +187,45 @@ export default function AssignReferees() {
         axios.post("api/v1",
             {
                 _collection: "ref_assignments",
-                _id: match,
-                referee: referee
+                homeTeam: match.homeTeam,
+                awayTeam: match.awayTeam,
+                referee: referee.name,
             })
             .then((res) => {
                 if (res && res.status === 200) {
-                    console.log(res.data);
+                    console.log("Assigned referee " + referee.name + " to match " + match.homeTeam + " vs " + match.awayTeam);
+                    getAssignments();
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     };
 
-    const refreshAssignments = async () => {
-        let assignmentIDs = [];
-        await axios.get("api/v1",
-            {
-                params: {
-                    _collection: "ref_assignments",
-                }
-            })
-            .then((res) => {
-                if (res && res.status === 200 && res.data.items) {
-                    assignmentIDs = res.data.items.map((item) => item._id);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        console.log(assignmentIDs);
-        for (let i = 0; i < assignmentIDs.length; i++) {
+    const deleteAssignment = async (event) => {
             await axios.delete("api/v1",
                 {
                     data: {
                         _collection: "ref_assignments",
-                        _id: assignmentIDs[i]
+                        _id: event.target.value,
                     }
                 })
                 .then((res) => {
                     if (res && res.status === 200) {
-                        console.log("Deleted: " + assignmentIDs[i]);
+                        console.log("Deleted: " + event.target.value);
+                        getAssignments();
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.error(error);
                 });
-        }
-
-        for (let i = 0; i < assignments.length; i++) {
-            await axios.post("api/v1",
-                {
-                    _collection: "ref_assignments",
-                    _id: matches[i]._id,
-                    referee: matches[i].assigned
-                })
-                .then((res) => {
-                    if (res && res.status === 200) {
-                        console.log(res.data);
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-        axios.post("api/v1",
-            {
-                _collection: "ref_assignments",
-                referee: referee,
-                match: match
-            })
-            .then((res) => {
-                if (res && res.status === 200) {
-                    console.log(res.data);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
     }
 
     useEffect(() => {
         getReferees();
         getMatches();
         getSurveyData();
+        getAssignments();
     }, []);
 
     return (
@@ -296,7 +249,7 @@ export default function AssignReferees() {
                 <Select value={referee} onChange={e => setReferee(e.target.value)}>
                     <MenuItem value="">Select a referee</MenuItem>
                     {referees.map(referee => (
-                        <MenuItem key={referee._id} value={referee._id}>{referee.name} ||| Score: {referee.score ? referee.score : "-"}</MenuItem>
+                        <MenuItem key={referee._id} value={referee}>{referee.name} ||| Score: {referee.score ? referee.score : "-"}</MenuItem>
                     ))}
                 </Select>
             </Box>
@@ -312,7 +265,7 @@ export default function AssignReferees() {
                 <Select value={match} onChange={e => setMatch(e.target.value)}>
                     <MenuItem value="">Select a match</MenuItem>
                     {matches.map((match) => (
-                        <MenuItem key={match._id} value={match._id}>{moment.unix(match.matchTime).format("DD/MM/YYYY HH:mm")} - {match.homeTeam} vs {match.awayTeam}</MenuItem>
+                        <MenuItem key={match._id} value={match}>{moment.unix(match.matchTime).format("DD/MM/YYYY HH:mm")} - {match.homeTeam} vs {match.awayTeam}</MenuItem>
                     ))}
                 </Select>
             </Box>
@@ -325,7 +278,7 @@ export default function AssignReferees() {
                 }}
             >
                 <Button
-                    onClick={refreshAssignments}
+                    onClick={assignReferee}
                     variant="contained"
                 >
                     Assign
@@ -381,6 +334,13 @@ export default function AssignReferees() {
                                                 {row.cells.map((cell) => {
                                                     return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                                 })}
+                                                <Button
+                                                    value={row.original._id}
+                                                    onClick={deleteAssignment}
+                                                    variant="contained"
+                                                >
+                                                    Delete
+                                                </Button>
                                             </tr>
                                         )
                                     })
