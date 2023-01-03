@@ -3,66 +3,88 @@ import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
 import '../CSS/Site.css';
 import Button from "@mui/material/Button";
 import {GlobalFilter} from './GlobalFilter';
-import SMOCK_DATA from './SMOCK_DATA.json'
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const StanCOLUMNS = [
     {
         Header: 'Position',
-        accessor: 'Position'
+        accessor: 'teamRank'
 
     },
     {
         Header: 'Team Name',
-        accessor: 'Team'
+        accessor: 'teamName'
     },
 
     {
         Header: 'All Matches',
         columns:[
             {
-                Header: 'Against',
-                accessor: 'Against'
+                Header: 'Overall',
+                accessor: 'O'
             }, 
             {
-                Header: 'Drawn',
-                accessor: 'Drawn'
+                Header: 'Win',
+                accessor: 'G'
             },
             
             {
-                Header: 'Goal Difference',
-                accessor: 'Goal Difference'
+                Header: 'Tie',
+                accessor: 'B'
             },
             {
-                Header: 'Lost',
-                accessor: 'lost'
+                Header: 'Defeat',
+                accessor: 'M'
             },
             {
-                Header: 'Played',
-                accessor: 'played'
+                Header: 'Goal Scored',
+                accessor: 'A'
             },
             {
-                Header: 'Won',
-                accessor: 'won'
+                Header: 'Conceded Goal',
+                accessor: 'Y'
             },
             {
-                Header: 'Total Points',
-                accessor: 'total points'
+                Header: 'Average',
+                accessor: 'AV'
+            },
+            {
+                Header: 'Points',
+                accessor: 'P'
             },
         ]
     },
-    
 ]
 
 export const StandingTable = () => {
-    const columns = useMemo(() => StanCOLUMNS, [])
-    const data = useMemo(() => SMOCK_DATA, [])
+    const [standings, setStandings] = useState([]);  
+
+    useEffect(() => {
+        axios.get("/api/v1/", {
+            params: {
+                _collection: "standing",
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((res) => {
+            if (res && res.status === 200 && res.data.items.length > 0) {                
+                setStandings(res.data.items);
+            }
+        });
+    }, []);
+    
+    const columns = useMemo(()=> StanCOLUMNS, [])  
     const tableInstance = useTable({
         columns: columns,
-        data: data
+        data: standings
     }, useGlobalFilter,
         useSortBy, usePagination)
     const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, canNextPage, canPreviousPage, previousPage, prepareRow, state, setGlobalFilter } = tableInstance
     const { globalFilter } = state
+
     return (
         <>
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />

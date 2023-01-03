@@ -3,40 +3,74 @@ import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
 import '../CSS/Site.css';
 import Button from "@mui/material/Button";
 import {GlobalFilter} from './GlobalFilter';
-import SMOCK_DATA from './FMOCK_DATA.json'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
 
 const FixCOLUMNS = [
     {
         Header: 'Home Team',
-        accessor: 'hometeam'
+        accessor: 'homeTeam'
     },
     {
         Header: 'Scores',
         columns : [
             {      
-                accessor: 'homescore'
+                accessor: 'scoreHome'
             },
             {
-                accessor: 'againstscore'
+                accessor: 'scoreAway'
             },
         ]
     },
     {
-        Header: 'Against Team',
-        accessor: 'againstteam'
+        Header: 'Away Team',
+        accessor: 'awayTeam'
     },    
     {
         Header: 'Date',
-        accessor: 'date'
+        columns:[
+            {
+                accessor: 'matchTime'
+            },
+            {
+                accessor: 'matchYear'
+            },
+            {
+                accessor: 'matchStatus'
+            }
+        ]       
     },
 ]
 
 export const FixturesTable = () => {
+    const [fixtures, setFixtures] = useState([]);  
+    useEffect(() => {
+        axios.get("/api/v1/", {
+            params: {
+                _collection: "fixture",
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((res) => {
+            if (res && res.status === 200 && res.data.items.length > 0) {     
+                const fix = res.data.items;
+                fix.forEach((row, index) => {
+                    fix[index].matchTime = moment.unix(row.matchTime).format("DD/MM/YYYY HH:mm");
+                     
+                })           
+                setFixtures(res.data.items);
+            }
+        });
+    }, []);
+
+    
     const columns = useMemo(() => FixCOLUMNS, [])
-    const data = useMemo(() => SMOCK_DATA, [])
     const tableInstance = useTable({
         columns: columns,
-        data: data
+        data: fixtures
     }, useGlobalFilter,
         useSortBy, usePagination)
     const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, canNextPage, canPreviousPage, previousPage, prepareRow, state, setGlobalFilter } = tableInstance

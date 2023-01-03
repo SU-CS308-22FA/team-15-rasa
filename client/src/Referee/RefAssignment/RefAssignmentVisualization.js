@@ -80,33 +80,33 @@ export default function RefereeAssignmentVisualization() {
                         key={row.referee}
                         sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
                         >
-                        <TableCell align="center">{row.home}</TableCell>
-                        <TableCell align="center">{row.away}</TableCell>
-                        <TableCell align="center">{row.referee}</TableCell>
-                        <TableCell align="center">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                startIcon={<CommentIcon />}
-                                onClick={
-                                    () => navigate("/refassignmentcomments",
-                                        {
-                                            state:
-                                                {
-                                                    ...location.state,
-                                                    ...{
-                                                        match_id: row._id,
-                                                        referee: row.referee,
-                                                        home: row.home,
-                                                        away: row.away,
-                                                    }
-                                            },
-                                        })
-                                }
-                            >
-                                Check Comments
-                            </Button>
-                        </TableCell>
+                            <TableCell align="center">{row.homeTeam}</TableCell>
+                            <TableCell align="center">{row.awayTeam}</TableCell>
+                            <TableCell align="center">{row.referee}</TableCell>
+                            <TableCell align="center">
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<CommentIcon />}
+                                    onClick={
+                                        () => navigate("/refassignmentcomments",
+                                            {
+                                                state:
+                                                    {
+                                                        ...location.state,
+                                                        ...{
+                                                            match_id: row._id,
+                                                            referee: row.referee,
+                                                            home: row.home,
+                                                            away: row.away,
+                                                        }
+                                                },
+                                            })
+                                    }
+                                >
+                                    Check Comments
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

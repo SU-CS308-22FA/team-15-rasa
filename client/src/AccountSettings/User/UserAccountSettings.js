@@ -30,7 +30,7 @@ const UserAccountSettings = ({ state, stateChanger }) => {
           alignItems: "flex-end",
         }}
       >
-        {UserMenu()}
+        <UserMenu />
       </Box>
       <main>
         <div>

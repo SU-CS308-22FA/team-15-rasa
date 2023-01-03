@@ -11,7 +11,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background-color: rgb(250, 234, 234);
     grid-gap: 10px;
     padding: 15px;
     padding-left: 10px;

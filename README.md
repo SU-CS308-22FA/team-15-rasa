@@ -5,7 +5,7 @@
 
 ## Description
 
-RASA is a full stack web application that uses match data from the Turkish Football Super League and ranks referees according to their bias score calculated by our proprietary algorithm. The bias score is determined by surveying users on the site and taking into account their opinions on the fairness of the referees.
+RASA is a full stack web application that uses match data from the Turkish Football Super League and ranks referees according to their performance score calculated by our proprietary algorithm. The bias score is determined by surveying users on the site and taking into account their opinions on the importance of certain statistics of referees.
 
 ## Table of Contents
 

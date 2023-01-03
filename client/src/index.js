@@ -20,6 +20,7 @@ import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import SeeComplaints from "./AdminPanel/SeeComplaints";
 import SeeFanComplaints from "./AdminPanel/SeeFanComplaints";
+import SeeReports from "./AdminPanel/SeeReports";
 import CreateTeamAccount from "./AccountSettings/Admin/CreateTeamAccount";
 import AdminChangePassword from "./AccountSettings/Admin/AdminChangePassword";
 
@@ -42,7 +43,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import MatchView from "./LiveMatch/MatchView";
-
+import AfterMatchVoting from "./Referee/AfterMatchVoting/AfterMatchVoting";
+import AddNews from "./NewsPage/AddNews";
+import News from "./NewsPage/News";
+import AssignReferees from "./AdminPanel/AssignReferees";
 export const light = {
   palette: {
     mode: "light",
@@ -81,6 +85,7 @@ export default function App() {
             <Route path="adminlogin" element={<AdminLogin />} />
             <Route path="adminpanel" element={<AdminPanel />} />
             <Route path="seecomplaints" element={<SeeComplaints />} />
+            <Route path="seereports" element={<SeeReports />} />
             <Route path="seefancomplaints" element={<SeeFanComplaints />} />
             <Route path="createteamaccount" element={<CreateTeamAccount />} />
             <Route
@@ -107,11 +112,15 @@ export default function App() {
               path="refassignmentwritecomment"
               element={<RefereeAssignmentWriteComment />}
             />
-            <Route path="refereelistdetails" element={<RefereeListDetails />} />
-            <Route path="refereerankings" element={<RefereeRankings />} />
-            <Route path="matchview" element={<MatchView />} />
+            <Route path="refereelistdetails" element={<RefereeListDetails/>} />
+            <Route path="refereerankings" element={<RefereeRankings/>} />
+            <Route path="matchview" element={<MatchView/>} />
             <Route path="signupjournal" element={<SignupJournal />} />
             <Route path="signinjournal" element={<SigninJournal />} />
+            <Route path="aftermatchvoting" element={<AfterMatchVoting/>} />
+            <Route path="addnews" element={<AddNews/>} />
+            <Route path="news" element={<News/>} />
+            <Route path="refassignmentadmin" element={<AssignReferees />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
