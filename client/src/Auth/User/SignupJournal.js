@@ -2,30 +2,47 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
 import axios from "axios";
-
+import { useState } from "react";
+import FileBase64 from "react-file-base64";
+import LZString from "lz-string";
 const theme = createTheme();
 
-export default function Signin() {
-  const location = useLocation();
+export default function SignupJournal() {
+  let [state, setState] = useState({
+    _collection: "",
+    username: "",
+    email: "",
+    password: "",
+    image: "",
+    confirmed: "false",
+  });
+
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!data.get("email") || !data.get("password")) {
-      alert("Invalid email or password");
+    if (!data.get("username") || !data.get("email") || !data.get("password")) {
+      alert("Invalid username, email or password");
       return;
     }
+    state = {
+      ...state,
+      _collection: "journalists",
+      username: data.get("username"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
     axios
       .get("/api/v1", {
         params: {
-          _collection: "users",
+          _collection: "journalists",
           email: data.get("email"),
         },
       })
@@ -33,26 +50,23 @@ export default function Signin() {
         console.log(err);
       })
       .then((res) => {
-        if (
-          res &&
-          (res.data.items.length === 0 ||
-            res.data.items[0].password !== data.get("password"))
-        ) {
-          alert("Invalid email or password");
+        if (res && res.data.items.length !== 0) {
+          alert("Email already exists");
           return;
         }
         if (res) {
-          if (location.state && location.state.from) {
-            navigate(location.state.from, {
-              state: { ...location.state, ...res.data.items[0] },
+          axios
+            .post("/api/v1", state)
+            .catch((err) => {
+              console.log(err);
+            })
+            .then((res) => {
+              if (res && res.status === 200) {
+                navigate("/signin");
+              } else {
+                alert("An error occurred while signing up, please try again.");
+              }
             });
-          } else {
-            navigate("/", {
-              state: { ...location.state, ...res.data.items[0] },
-            });
-          }
-        } else {
-          alert("There was an error. Please try again.");
         }
       });
   };
@@ -88,7 +102,7 @@ export default function Signin() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -110,35 +124,50 @@ export default function Signin() {
               margin="normal"
               required
               fullWidth
+              name="username"
+              label="Username"
+              type="username"
+              id="user"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
+            <div>
+              Upload a photo of your journalist ID
+              <FileBase64
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setState({
+                    ...state,
+                    image: base64,
+                  })
+                }
+              />
+              <img src="data:image/png;base64," />
+            </div>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
-              <Grid item>
-                <Link to="/">Home Page</Link>
-              </Grid>
               <Grid item xs></Grid>
               <Grid item>
-                <Link to="/signup">Sign up</Link>
+                <Link to="/signin">Have an account? Sign in</Link>
               </Grid>
-              <Grid item xs></Grid>
               <Grid item>
-                <Link to="/forgotpassword">Forgot password?</Link>
-              </Grid>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link to="/signinjournal">Sign in as a journalist</Link>
+                <Link to="/signupjournal">Sign up as a journalist</Link>
               </Grid>
             </Grid>
           </Box>
