@@ -11,12 +11,338 @@ import UserMenu from "../../UserMenu/UserMenu";
 import Button from "@mui/material/Button";
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import ReactMarkdown from "react-markdown";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ReportIcon from '@mui/icons-material/Report';
 
 
 export default function RefereeAssignmentComments() {
     const [comments, setComments] = useState([]);
     const navigate = useNavigate();
     const location = useLocation();
+
+    const handleLike = (comment) => {
+        if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) === -1) { //0 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.likes.push(location.state._id); //add like
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+        else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.likes.push(location.state._id); //add like
+            const index2 = comment.dislikes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.dislikes.splice(index2, 1); //remove dislike
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+        else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            const index2 = comment.likes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.likes.splice(index2, 1); //remove like
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+    };
+
+    const handleDislike = (comment) => {
+        if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) === -1) { //0 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.dislikes.push(location.state._id); //add dislike
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+        else if (comment.likes.indexOf(location.state._id) === -1 && comment.dislikes.indexOf(location.state._id) !== -1){//0 1
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            const index2 = comment.dislikes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.dislikes.splice(index2, 1); //remove dislike
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+        else if (comment.likes.indexOf(location.state._id) !== -1 && comment.dislikes.indexOf(location.state._id) === -1){//1 0
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.dislikes.push(location.state._id); //add dislike
+            const index2 = comment.likes.indexOf(location.state._id);
+            if (index2 > -1) { 
+                comment.likes.splice(index2, 1); //remove like
+            }
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                });
+        }
+    };
+
+    const handleReport = (comment) => {
+        if (comment.reports.indexOf(location.state._id) === -1) {
+            const index = comments.indexOf(comment);
+            if (index > -1) {
+                comments.splice(index, 1); //remove comment
+            }
+            comment.reports.push(location.state._id); //add dislike
+            axios.put("/api/v1/", {
+                _collection: "ref_assignments",
+                _id: location.state.match_id,
+                comments: [
+                    {
+                        username: comment.username,
+                        match_id: comment.match_id,
+                        date: comment.date,
+                        comment: comment.comment,
+                        email: comment.email,
+                        likes: comment.likes,
+                        reports: comment.reports,
+                        dislikes: comment.dislikes
+                    },
+                    ...comments
+                ]
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    setComments([
+                        {
+                            username: comment.username,
+                            match_id: comment.match_id,
+                            date: comment.date,
+                            comment: comment.comment,
+                            email: comment.email,
+                            likes: comment.likes,
+                            reports: comment.reports,
+                            dislikes: comment.dislikes
+                        },
+                        ...comments
+                    ]);
+                    alert("The comment you reported will be inspected by admins.");
+                });
+        }
+        else{
+            alert("You have already reported this comment.");
+        }
+    }
+
+    const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
 
     useEffect(() => {
         axios.get("/api/v1/", {
@@ -30,15 +356,10 @@ export default function RefereeAssignmentComments() {
             })
             .then((res) => {
                 if (res && res.status === 200 && res.data.items.length > 0) {
-                    setComments(res.data.items[0].comments.sort((a, b) => {
-                        return new Date(b.date) - new Date(a.date);
-                    }));
+                    setComments(res.data.items[0].comments ? res.data.items[0].comments : comments);
                 }
             });
     }, []);
-
-
-    const imgLink = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
 
     return (
         <div>
@@ -79,7 +400,9 @@ export default function RefereeAssignmentComments() {
                 </Grid>
             </Grid>
             <Grid container spacing={2}>
-                {comments.map((comment) => (
+                {comments.sort((a, b) => {
+                    return new Date(b.date) - new Date(a.date);
+                }).map((comment) => (
                     <Grid item xs={12}>
                         <Paper elevation={3} style={{ padding: 14 }}>
                             <Grid container wrap="nowrap" spacing={2}>
@@ -96,6 +419,27 @@ export default function RefereeAssignmentComments() {
                                     <p style={{ textAlign: "left", color: "gray" }}>
                                         posted at {Moment(comment.date).format("MMMM Do YYYY, h:mm:ss a")}
                                     </p>
+                                    {location.state && location.state.username ? (
+                                    <Grid container columnSpacing={{ xs: 2, md: 3 }}>
+                                        <Grid xs={0.75}>
+                                            <Button variant="contained" startIcon={<ThumbUpIcon />} onClick={() => handleLike(comment)}>
+                                                {comment.likes.length}
+                                            </Button>
+                                        </Grid>
+                                        <Grid xs={0.75}>
+                                            <Button variant="contained" startIcon={<ThumbDownIcon />} onClick={() => handleDislike(comment)}>
+                                                {comment.dislikes.length}
+                                            </Button>
+                                        </Grid>
+                                        <Grid >
+                                            <Button variant="contained" startIcon={<ReportIcon />} onClick={() => handleReport(comment)}>
+                                                Report Comment
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </Grid>
                             </Grid>
                         </Paper>

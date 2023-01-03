@@ -435,6 +435,20 @@ export default function AdminPanel() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={() =>
+                      navigate("/seereports", { state: location.state })
+                    }
+                  >
+                    See Reported Comments
+                  </Button>
+                </ListItemButton>
+                <Divider />
+                <ListItemButton>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() =>
                       navigate("/createteamaccount", { state: location.state })
                     }
                   >
@@ -456,7 +470,7 @@ export default function AdminPanel() {
                   </Button>
                 </ListItemButton>
                 
-                <Divider light />
+                <Divider />
                 <ListItemButton>
                   <Button
                     type="submit"
