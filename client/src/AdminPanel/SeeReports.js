@@ -35,6 +35,9 @@ export default function SeeReports() {
                     const assignments = res.data.items;
                     console.log(assignments);
                     for(let i=0;i<assignments.length;i++){
+                        if (!assignments[i].comments) {
+                            continue;
+                        }
                         for(let j=0;j<assignments[i].comments.length;j++){
                             allComments = allComments.concat(assignments[i].comments[j]);
                             if(assignments[i].comments[j].reports.length>0){
