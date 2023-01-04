@@ -15,7 +15,7 @@ import UserProfile from "./Profile/User/UserProfile";
 import StandFix from "./FixtureStanding/StandFix";
 import RefereeData from "./Referee/RefereeData";
 import FanComplaint from "./Misc/FanComplaint";
-
+import JournalistSurvey from "./Auth/User/JournalistSurvey";
 import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import SeeComplaints from "./AdminPanel/SeeComplaints";
@@ -112,14 +112,15 @@ export default function App() {
               path="refassignmentwritecomment"
               element={<RefereeAssignmentWriteComment />}
             />
-            <Route path="refereelistdetails" element={<RefereeListDetails/>} />
-            <Route path="refereerankings" element={<RefereeRankings/>} />
-            <Route path="matchview" element={<MatchView/>} />
+            <Route path="refereelistdetails" element={<RefereeListDetails />} />
+            <Route path="refereerankings" element={<RefereeRankings />} />
+            <Route path="journalistsurvey" element={<JournalistSurvey />} />
+            <Route path="matchview" element={<MatchView />} />
             <Route path="signupjournal" element={<SignupJournal />} />
             <Route path="signinjournal" element={<SigninJournal />} />
-            <Route path="aftermatchvoting" element={<AfterMatchVoting/>} />
-            <Route path="addnews" element={<AddNews/>} />
-            <Route path="news" element={<News/>} />
+            <Route path="aftermatchvoting" element={<AfterMatchVoting />} />
+            <Route path="addnews" element={<AddNews />} />
+            <Route path="news" element={<News />} />
             <Route path="refassignmentadmin" element={<AssignReferees />} />
             <Route path="*" element={<NoPage />} />
           </Route>

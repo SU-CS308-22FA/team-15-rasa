@@ -13,27 +13,28 @@ import UserMenu from "../UserMenu/UserMenu";
 import MatchViewMenu from "./MatchViewMenu";
 import AfterMatchVotingMenu from "./AfterMatchVotingMenu";
 
-
 export default function HomePage({ stateChanger }) {
   const navigate = useNavigate();
   let [location, setLocation] = React.useState(useLocation());
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
-
-    useEffect(() => {
-        if(!window.location.hash && location.state) {
-            window.location = window.location + '#loaded';
-            const locationState = location.state;
-            window.localStorage.setItem("locationState", JSON.stringify(locationState));
-            window.location.reload();
-        }
-        const themeUnparsed = window.localStorage.getItem("theme");
-        stateChanger(themeUnparsed ? JSON.parse(themeUnparsed) : true);
-        location.state = JSON.parse(window.localStorage.getItem("locationState"));
-        setLocation(location);
-        forceUpdate();
-    }, [location, stateChanger, forceUpdate]);
+  useEffect(() => {
+    if (!window.location.hash && location.state) {
+      window.location = window.location + "#loaded";
+      const locationState = location.state;
+      window.localStorage.setItem(
+        "locationState",
+        JSON.stringify(locationState)
+      );
+      window.location.reload();
+    }
+    const themeUnparsed = window.localStorage.getItem("theme");
+    stateChanger(themeUnparsed ? JSON.parse(themeUnparsed) : true);
+    location.state = JSON.parse(window.localStorage.getItem("locationState"));
+    setLocation(location);
+    forceUpdate();
+  }, [location, stateChanger, forceUpdate]);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -65,7 +66,7 @@ export default function HomePage({ stateChanger }) {
             alignItems: "flex-end",
           }}
         >
-            <UserMenu/>
+          <UserMenu />
         </Box>
         <Box
           sx={{
@@ -99,13 +100,10 @@ export default function HomePage({ stateChanger }) {
                 Referee Assignments
               </Button>
             </ListItemButton>
-              <MatchViewMenu/>
-              {
-                    location.state && location.state.username ?
-                        <AfterMatchVotingMenu/>
-                        :
-                        null
-              }
+            <MatchViewMenu />
+            {location.state && location.state.username ? (
+              <AfterMatchVotingMenu />
+            ) : null}
             <ListItemButton divider>
               <Button
                 type="submit"
@@ -147,21 +145,21 @@ export default function HomePage({ stateChanger }) {
                 Survey Results
               </Button>
             </ListItemButton>
-              {location.state && location.state.username ? (
-                  <ListItemButton divider>
-                      <Button
-                          type="submit"
-                          fullWidth
-                          variant="contained"
-                          sx={{ mt: 3, mb: 2 }}
-                          onClick={() => navigate("/survey", { state: location.state })}
-                      >
-                          Take the survey
-                      </Button>
-                  </ListItemButton>
-              ) : (
-                  <></>
-              )}
+            {location.state && location.state.username ? (
+              <ListItemButton divider>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() => navigate("/survey", { state: location.state })}
+                >
+                  Take the survey
+                </Button>
+              </ListItemButton>
+            ) : (
+              <></>
+            )}
             <ListItemButton divider>
               <Button
                 type="submit"
@@ -212,7 +210,9 @@ export default function HomePage({ stateChanger }) {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={() => navigate("/survey", { state: location.state })}
+                  onClick={() =>
+                    navigate("/journalistsurvey", { state: location.state })
+                  }
                 >
                   Referee scoring for journalists
                 </Button>
