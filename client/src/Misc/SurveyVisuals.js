@@ -45,8 +45,7 @@ class SurveyVisualsClass extends React.PureComponent {
           data2: allData[1],
           data3: allData[2],
           data4: allData[3],
-          data5: allData[4],
-          data6: allData[5],
+          data5: allData[4],          
         });
         console.log(this.state);
       });

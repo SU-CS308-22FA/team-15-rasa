@@ -177,6 +177,17 @@ export default function HomePage({ stateChanger }) {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={() => navigate("/news", { state: location.state })}
+              >
+                See Sport News
+              </Button>
+            </ListItemButton>
+            <ListItemButton divider>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
                 onClick={() =>
                   navigate("/refereedata", { state: location.state })
                 }
@@ -196,6 +207,23 @@ export default function HomePage({ stateChanger }) {
                   }
                 >
                   Send Complaint
+                </Button>
+              </ListItemButton>
+            ) : (
+              <></>
+            )}
+            {location.state && location.state.username ? (
+              <ListItemButton divider>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() =>
+                    navigate("/addnews", { state: location.state })
+                  }
+                >
+                  Add News
                 </Button>
               </ListItemButton>
             ) : (
