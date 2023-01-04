@@ -6,51 +6,10 @@ import {AppBar, Toolbar,} from "@mui/material";
 import React, {useState} from "react";
 import axios from "axios";
 
-/*async function getdata(){
-    axios
-        .get("/api/v1", {
-            params: {
-                _collection: "complaints"
-            },
-        })
-        .catch((err) => {
-            console.log(err);
-            console.log("something is wrong");
-        })
-        .then((res)=>{
-            console.log("data recieved");
-            console.log(res);
-            return res.data.items;
-        })
-        .then(function(items){
-            let placeholder = document.querySelector("#data-output");
-            console.log(placeholder);
-            let out = "";
-            for(let item of items){
-                console.log(item);
-                console.log(item.ref_name);
-                console.log(item.explanation);
-                console.log(item.email);
-                out+=`
-                    <tr>
-                        <td> ${item.ref_name} </td>
-                        <td> ${item.explanation} </td>
-                        <td> ${item.email} </td>
-                    </tr>
-                `;
-            }
-            console.log(out);
-            console.log(placeholder);
-            return out;
-            placeholder.innerHTML = out;
-        })
-  }*/
-
 export default function SeeComplaints() {
   const location = useLocation();
   const navigate = useNavigate();
   const [complaintList, setComplaintList] = useState([]);
-  //const asd = getdata();
 
   const getinfo = () => {
     axios
