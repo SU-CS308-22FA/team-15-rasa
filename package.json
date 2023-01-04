@@ -28,7 +28,8 @@
     "mongodb": "^4.11.0",
     "nodemon": "^2.0.20",
     "puppeteer": "^19.4.1",
-    "requirements": "^1.4.1",
-    "react-simplemde-editor": "^5.2.0"
+    "react-file-base64": "^1.0.3",
+    "react-simplemde-editor": "^5.2.0",
+    "requirements": "^1.4.1"
   }
 }

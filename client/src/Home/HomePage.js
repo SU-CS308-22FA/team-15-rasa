@@ -249,7 +249,9 @@ export default function HomePage({ stateChanger }) {
             ) : (
               <></>
             )}
-            {location.state && location.state.username ? (
+            {location.state &&
+            location.state.username &&
+            location.state.journalist == "true" ? (
               <ListItemButton divider>
                 <Button
                   type="submit"
@@ -260,7 +262,7 @@ export default function HomePage({ stateChanger }) {
                     navigate("/addnews", { state: location.state })
                   }
                 >
-                  Add News
+                  Add News for Journalists
                 </Button>
               </ListItemButton>
             ) : (
