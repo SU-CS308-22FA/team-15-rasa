@@ -1,0 +1,100 @@
+{
+  "id": "12f12a3f-3f73-41a4-b4a9-5b3a671869a6",
+  "version": "2.0",
+  "name": "rasa",
+  "url": "https://rasa-0jba.onrender.com",
+  "tests": [{
+    "id": "5a4d22e8-2f42-46e8-aab5-d42a296f3f0d",
+    "name": "https://rasa-0jba.onrender.com/news",
+    "commands": [{
+      "id": "b6e9c42c-7ddb-4679-bf1c-2a274a4a716d",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a08fb48b-cde4-41c9-b30b-d506d45559b0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1296x688",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5ad8be5c-1488-4c68-ab48-3129a0781f18",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='submit'])[9]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div[2]/ul/div[9]/button", "xpath:idRelative"],
+        ["xpath=//div[9]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "32781893-7953-4534-9da7-315d2877d885",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6fd30faa-29d5-462a-aa3f-6553bfd4b63b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.tab-fix .MuiButtonBase-root",
+      "targets": [
+        ["css=.tab-fix .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/h2/button", "xpath:idRelative"],
+        ["xpath=//h2/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "946098c5-0969-4592-9e77-4579f1d41847",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "53a950fa-5085-4aa4-8774-5f6ad7bc1d29",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "c503117d-c594-4279-9daa-dce8eaa74d7b",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "412a9ccb-d222-4442-8e2f-0080e60fd136",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "148e128c-c4ab-417c-b58f-f2136b5ac991",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://rasa-0jba.onrender.com/"],
+  "plugins": []
+}

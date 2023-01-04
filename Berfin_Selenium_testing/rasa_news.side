@@ -1,0 +1,136 @@
+{
+  "id": "12f12a3f-3f73-41a4-b4a9-5b3a671869a6",
+  "version": "2.0",
+  "name": "rasa",
+  "url": "https://rasa-0jba.onrender.com",
+  "tests": [{
+    "id": "ed5d9cab-c432-4515-b6bb-20c24d5fc9d5",
+    "name": "https://rasa-0jba.onrender.com",
+    "commands": [{
+      "id": "a71e10aa-912b-4523-a4fd-c6e9ccf828a0",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a9ee69db-9793-440a-8ef3-37d9817afa7e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1296x688",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "537a673c-f545-41b2-b8dc-689bcf06fd44",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='submit'])[9]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div[2]/ul/div[9]/button", "xpath:idRelative"],
+        ["xpath=//div[9]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7ee6cccd-116c-44c0-8d56-24a598ae2312",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(9) > .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='submit'])[9]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div[2]/ul/div[9]/button", "xpath:idRelative"],
+        ["xpath=//div[9]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff352da4-55fb-47fe-ad20-3e013c4ae08d",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "304cffc6-fcca-4892-b7d1-5220c5369636",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.tab-standings .MuiButtonBase-root",
+      "targets": [
+        ["css=.tab-standings .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/h2/button", "xpath:idRelative"],
+        ["xpath=//div[2]/h2/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce244150-facd-42b7-a760-9d45e0d3f8e4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.tab-standings .MuiButtonBase-root",
+      "targets": [
+        ["css=.tab-standings .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/h2/button", "xpath:idRelative"],
+        ["xpath=//div[2]/h2/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8430f60-3122-4840-a7e2-b8dfda048415",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.tab-standings .MuiButtonBase-root",
+      "targets": [
+        ["css=.tab-standings .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/h2/button", "xpath:idRelative"],
+        ["xpath=//div[2]/h2/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0eec79d-8c0e-4dd6-8d9e-bab3715e2255",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "286dd43e-a5f1-4835-899b-ca232be3f935",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a0a617c-c2bd-4b01-be51-b374faaa9e99",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiPaper-root:nth-child(1) .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "13138c21-e117-4cf3-9f14-bb838b1500c1",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "148e128c-c4ab-417c-b58f-f2136b5ac991",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://rasa-0jba.onrender.com/"],
+  "plugins": []
+}
