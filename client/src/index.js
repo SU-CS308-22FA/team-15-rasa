@@ -1,5 +1,5 @@
-import {createRoot} from "react-dom/client";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Signin from "./Auth/User/Signin";
 import ForgotPassword from "./Auth/User/ForgotPassword";
@@ -15,7 +15,7 @@ import UserProfile from "./Profile/User/UserProfile";
 import StandFix from "./FixtureStanding/StandFix";
 import RefereeData from "./Referee/RefereeData";
 import FanComplaint from "./Misc/FanComplaint";
-
+import JournalistSurvey from "./Auth/User/JournalistSurvey";
 import AdminLogin from "./Auth/Admin/AdminLogin";
 import AdminPanel from "./AdminPanel/AdminPanel";
 import SeeComplaints from "./AdminPanel/SeeComplaints";
@@ -37,9 +37,10 @@ import RefereeAssignmentComments from "./Referee/RefAssignment/RefAssignmentComm
 import RefereeAssignmentWriteComment from "./Referee/RefAssignment/RefAssignmentWriteComment";
 import RefereeListDetails from "./RefereeListDetails/RefereeListDetails";
 import RefereeRankings from "./RefereeRankings/RefereeRankings";
-
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import React, {useState} from "react";
+import SignupJournal from "./Auth/User/SignupJournal";
+import SigninJournal from "./Auth/User/SigninJournal";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import MatchView from "./LiveMatch/MatchView";
 import AfterMatchVoting from "./Referee/AfterMatchVoting/AfterMatchVoting";
@@ -111,12 +112,15 @@ export default function App() {
               path="refassignmentwritecomment"
               element={<RefereeAssignmentWriteComment />}
             />
-            <Route path="refereelistdetails" element={<RefereeListDetails/>} />
-            <Route path="refereerankings" element={<RefereeRankings/>} />
-            <Route path="matchview" element={<MatchView/>} />            
-            <Route path="aftermatchvoting" element={<AfterMatchVoting/>} />
-            <Route path="addnews" element={<AddNews/>} />
-            <Route path="news" element={<News/>} />
+            <Route path="refereelistdetails" element={<RefereeListDetails />} />
+            <Route path="refereerankings" element={<RefereeRankings />} />
+            <Route path="journalistsurvey" element={<JournalistSurvey />} />
+            <Route path="matchview" element={<MatchView />} />
+            <Route path="signupjournal" element={<SignupJournal />} />
+            <Route path="signinjournal" element={<SigninJournal />} />
+            <Route path="aftermatchvoting" element={<AfterMatchVoting />} />
+            <Route path="addnews" element={<AddNews />} />
+            <Route path="news" element={<News />} />
             <Route path="refassignmentadmin" element={<AssignReferees />} />
             <Route path="*" element={<NoPage />} />
           </Route>

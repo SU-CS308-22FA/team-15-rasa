@@ -27,7 +27,7 @@ MongoClient.connect(uri)
     //await usersDAO.injectDB(client);
     await genericDAO.injectDB(client);
     app.use(cors());
-    app.use(express.json());
+    app.use(express.json({ limit: "50mb" }));
     app.use("/api/v1", dbRouter);
     app.use("/api/sportRadar", sportRadarRouter);
     app.use("/api/mackolik", mackolikRouter);

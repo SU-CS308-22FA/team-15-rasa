@@ -3,11 +3,11 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {createTheme} from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import axios from "axios";
 
 const theme = createTheme();
@@ -139,6 +139,9 @@ export default function Signup() {
               <Grid item xs></Grid>
               <Grid item>
                 <Link to="/signin">Have an account? Sign in</Link>
+              </Grid>
+              <Grid item>
+                <Link to="/signupjournal">Sign up as a journalist</Link>
               </Grid>
             </Grid>
           </Box>
