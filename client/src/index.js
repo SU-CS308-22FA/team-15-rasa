@@ -47,6 +47,7 @@ import AfterMatchVoting from "./Referee/AfterMatchVoting/AfterMatchVoting";
 import AddNews from "./NewsPage/AddNews";
 import News from "./NewsPage/News";
 import AssignReferees from "./AdminPanel/AssignReferees";
+import SeeJournalists from "./AdminPanel/SeeJournalists";
 export const light = {
   palette: {
     mode: "light",
@@ -69,6 +70,7 @@ export default function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path="forgotpassword" element={<ForgotPassword />} />
+            <Route path="seejournalists" element={<SeeJournalists />} />
             <Route
               path="accountsettings"
               element={

@@ -46,13 +46,13 @@ export default function JournalistSurvey() {
       });
   }, []);
   const questions = [
-    "From 1 to 10, how would you rate the offside calls in this match?",
-    "From 1 to 10, how would you rate the foul calls in this match?",
+    "From 1 to 10, how would you rate the offside calls of this referee?",
+    "From 1 to 10, how would you rate the foul calls of this referee?",
     "From 1 to 10, how would you rate the communication of the referee to the players?",
-    "From 1 to 10, how would you rate the bookings in this game?",
-    "From 1 to 10, how would you rate the throw in decisions in this game?",
-    "From 1 to 10, how would you rate the corner kick decisions in this game?",
-    "From 1 to 10, how would you rate the goal kick decisions in this game?",
+    "From 1 to 10, how would you rate the bookings of this referee?",
+    "From 1 to 10, how would you rate the throw in decisions of this referee?",
+    "From 1 to 10, how would you rate the corner kick decisions of this referee?",
+    "From 1 to 10, how would you rate the goal kick decisions of this referee?",
     "From 1 to 10, how would you rate the referee's attempt at maintaining the tempo of the game?",
     "From 1 to 10, how would you rate the referee's communication with VAR?",
   ];

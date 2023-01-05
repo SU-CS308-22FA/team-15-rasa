@@ -33,7 +33,8 @@ export default function SigninJournal() {
         console.log(err);
       })
       .then((res) => {
-        if (res.data.items[0].confirmed === "false") {
+        console.log(res.data.items[0].confirmed);
+        if (res.data.items[0].confirmed === "true") {
           if (
             res &&
             (res.data.items.length === 0 ||
