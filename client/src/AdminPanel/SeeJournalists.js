@@ -6,45 +6,7 @@ import { AppBar, Toolbar, Button } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 
-/*async function getdata(){
-    axios
-        .get("/api/v1", {
-            params: {
-                _collection: "complaints"
-            },
-        })
-        .catch((err) => {
-            console.log(err);
-            console.log("something is wrong");
-        })
-        .then((res)=>{
-            console.log("data recieved");
-            console.log(res);
-            return res.data.items;
-        })
-        .then(function(items){
-            let placeholder = document.querySelector("#data-output");
-            console.log(placeholder);
-            let out = "";
-            for(let item of items){
-                console.log(item);
-                console.log(item.ref_name);
-                console.log(item.explanation);
-                console.log(item.email);
-                out+=`
-                    <tr>
-                        <td> ${item.ref_name} </td>
-                        <td> ${item.explanation} </td>
-                        <td> ${item.email} </td>
-                    </tr>
-                `;
-            }
-            console.log(out);
-            console.log(placeholder);
-            return out;
-            placeholder.innerHTML = out;
-        })
-  }*/
+
 
 export default function SeeJournalists() {
   const location = useLocation();
@@ -100,43 +62,51 @@ export default function SeeJournalists() {
             <table border="4">
               <tr>
                 {complaintList.map((val, key) => {
-                  return <td>{val.username}</td>;
+                  if (val.confirmed === "false") {
+                    return <td>{val.username}</td>;
+                  }
                 })}
               </tr>
               <tr>
                 {complaintList.map((val, key) => {
-                  return <td>{val.email}</td>;
+                  if (val.confirmed === "false") {
+                    return <td>{val.email}</td>;
+                  }
                 })}
               </tr>
               <tr>
                 {complaintList.map((val, key) => {
-                  return (
-                    <td>
-                      <img height="200" width="200" src={`${val.image}`} />
-                    </td>
-                  );
+                  if (val.confirmed === "false") {
+                    return (
+                      <td>
+                        <img height="200" width="200" src={`${val.image}`} />
+                      </td>
+                    );
+                  }
                 })}
               </tr>
               <tr>
                 {complaintList.map((val, key) => {
-                  return (
-                    <td>
-                      <Button
-                        onClick={() =>
-                          updateJournalist(
-                            val.username,
-                            val.email,
-                            val.image,
-                            val.password,
-                            val._id
-                          )
-                        }
-                        variant="contained"
-                      >
-                        Accept journalist
-                      </Button>
-                    </td>
-                  );
+                  if (val.confirmed === "false") {
+                    return (
+                      <td>
+                        <Button
+                          onClick={() =>
+                            updateJournalist(
+                              val.username,
+                              val.email,
+                              val.image,
+                              val.password,
+                              val._id
+                            )
+                          }
+                          variant="contained"
+                        >
+                          Accept journalist
+                        </Button>
+                      </td>
+                    );
+                  }
                 })}
               </tr>
               <label></label>
