@@ -1,0 +1,132 @@
+{
+  "id": "c8cd1cd8-3117-4596-83cb-27bfda84cfd0",
+  "version": "2.0",
+  "name": "deleteComment",
+  "url": "https://rasa-0jba.onrender.com",
+  "tests": [{
+    "id": "5e116993-38bf-4653-b5ff-2faa7ace86cb",
+    "name": "deleteComment",
+    "commands": [{
+      "id": "d85eeff8-c73f-41f9-b034-5010fc67c0da",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "46565e06-923c-445b-92a0-55854f78507f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1550x838",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f04d49e4-c204-44bd-8789-c9cb6d9c0c3a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Admin Login Page",
+      "targets": [
+        ["linkText=Admin Login Page", "linkText"],
+        ["css=a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Admin Login Page')]", "xpath:link"],
+        ["xpath=//div[@id='root']/main/div[2]/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/adminlogin')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Admin Login Page')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5fe0ce9-6761-47d3-ba77-6be6d9cf628a",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e01eb7d1-b357-472d-9be5-92782828b1f4",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8737585a-ff20-4e26-8007-afd18a7a3680",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "0348c348-85f5-4cd2-b08e-18c7fd7107a5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.css-164r41r",
+      "targets": [
+        ["css=.css-164r41r", "css:finder"],
+        ["xpath=//div[@id='root']/main/div[2]/div/form", "xpath:idRelative"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "31d59daa-9a91-4903-aeee-db59fd166eb5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiButtonBase-root", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div[2]/div/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05b9f836-3de2-40da-8540-5505a455614f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(6) > .MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(6) > .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='submit'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div/div/div[2]/ul/div[4]/button", "xpath:idRelative"],
+        ["xpath=//ul/div[4]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7157d10-e8b8-422f-b9de-a6bde1e97319",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(3) .MuiButtonBase-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(3) .MuiButtonBase-root", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div[3]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "9fef849e-be95-43e5-a1bc-4bebac021731",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["5e116993-38bf-4653-b5ff-2faa7ace86cb"]
+  }],
+  "urls": ["https://rasa-0jba.onrender.com/"],
+  "plugins": []
+}
