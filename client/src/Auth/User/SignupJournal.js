@@ -23,7 +23,7 @@ export default function SignupJournal() {
     image: "",
     confirmed: "false",
   });
-
+  const myString = "data:image/png;base64,";
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -151,7 +151,7 @@ export default function SignupJournal() {
                   })
                 }
               />
-              <img src="data:image/png;base64," />
+              {state.image ? <img src={`${state.image}`} /> : ""}
             </div>
             <Button
               type="submit"
