@@ -16,7 +16,6 @@ class SurveyVisualsClass extends React.PureComponent {
       data3: [],
       data4: [],
       data5: [],
-      data6: [],
     };
     axios
       .get("/api/v1", {
@@ -29,17 +28,21 @@ class SurveyVisualsClass extends React.PureComponent {
       })
       .then((res) => {
         let allData = [];
-        for (let i = 1; i < res.data.items.length + 1; i++) {
-          const groupedData = groupBy(res.data.items, `rating${i}`);
+        const results = res.data.items;
+        Object.keys(results[0]).forEach((key) => {
+          if (key === "_id" || key === "email") {
+            return;
+          }
+          const groupedData = groupBy(results, key);
           let newData = [];
-          Object.keys(groupedData).forEach(function (key, index) {
+          Object.keys(groupedData).forEach(function (key) {
             let obj = {};
             obj["count"] = groupedData[key].length;
             obj["key"] = key;
             newData.push(obj);
           });
           allData.push(newData);
-        }
+        });
         this.setState({
           data: allData[0],
           data2: allData[1],
@@ -59,7 +62,16 @@ class SurveyVisualsClass extends React.PureComponent {
             Referee Survey
           </Typography>
         </Toolbar>
-      </AppBar>        
+      </AppBar>
+        <Box
+            sx={{
+              my: 8,
+              mx: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+        >
       <div className="app_container">
         <div className="content_container">
           <PieChart
@@ -141,6 +153,7 @@ class SurveyVisualsClass extends React.PureComponent {
           </PieChart>
           </div>
         </div>
+        </Box>
       </div>
     );
   }
@@ -148,18 +161,6 @@ class SurveyVisualsClass extends React.PureComponent {
 
 export default function SurveyVisuals() {
   return (
-    <div>
-      <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-      >
-        <SurveyVisualsClass />
-      </Box>
-    </div>
+      <SurveyVisualsClass />
   );
 }
